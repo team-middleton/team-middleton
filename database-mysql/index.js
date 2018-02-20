@@ -18,10 +18,6 @@ var selectAll = function(callback) {
   });
 };
 
-var hashPass = function(value, callback){
-  //hashing function with bcrypt will go here
-}
-
 //possible helper functions: 
   //checking if user in the database
   //check password provided for user
