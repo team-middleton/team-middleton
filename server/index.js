@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
+var APIKey = require('/yelpAPI.js');
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -97,9 +98,17 @@ app.post('/budget', (req, res) => {
 })
 
 app.get('/services', (req, res) => {
-  yelp.findServices(req.searchterm, req.zipcode)
-  .then((result) => {
-    res.status(200).send(result)
+	axios.get('https://api.yelp.com/v3/businesses/search', {
+  	headers: {
+  		Authorization : `Bearer ${APIKey.yelpAPI}`
+  	}, 
+  	params: {
+  		term: req.query.term,
+  		location: req.query.location
+  	}
+  })
+  .then((response) => {
+  	res.status.send(response.data)
   })
   .catch((err) => {
     console.error(err)
