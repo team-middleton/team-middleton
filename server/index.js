@@ -21,7 +21,7 @@ app.post('/signup', (req, res) => {
           bcrypt.hash(pass, null, null, (err, hash) => {
             if (err) console.error(err)
             db.connection.query(
-              `INSERT INTO users (id, username, password, to, from, budget) VALUES (?, ?, ?, ?, ?, ?)`,
+              `INSERT INTO users (id, username, password, zipcodefrom, zipcodeto, totalbudget) VALUES (?, ?, ?, ?, ?, ?)`,
               [null, user, hash, null, null, null], 
               function(err) {
                 if (err) console.error(err)
@@ -68,7 +68,7 @@ app.post('/login', (req, res) => {
 
 app.post('/userdata', (req, res) => {
   db.connection.query(
-    `UPDATE users SET from = ${req.from}, to = ${req.to} WHERE id = ${req.userId}`, 
+    `UPDATE users SET zipcodefrom = ${req.zipcodefrom}, zipcodeto = ${req.zipcodeto} WHERE id = ${req.userId}`, 
     function(err) {
       if (err) console.error(err)
       res.status(201).send()
@@ -77,30 +77,45 @@ app.post('/userdata', (req, res) => {
 })
 
 app.post('/tasks', (req, res) => {
-
+  db.connection.query(
+    `INSERT INTO tasks (id, user, task, price, complete, searchterm) VALUES (?, ?, ?, ?, ?, ?)`,
+    function(err) {
+      if (err) console.error(err)
+      res.status(201).send()
+    }
+  )
 })
 
 app.post('/budget', (req, res) => {
-
+  db.connection.query(
+    `UPDATE users SET totalbudget = ${req.budget} WHERE id = ${req.userId}`,
+    function(err) {
+      if (err) console.error(err)
+      res.status(201).send()
+    }
+  )
 })
 
 app.get('/services', (req, res) => {
-
-})
-
-app.post('/services', (req, res) => {
-
+  yelp.findServices(req.searchterm, req.zipcode)
+  .then((result) => {
+    res.status(200).send(result)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
 })
 
 app.get('/map', (req, res) => {
-
-})
-
-app.post('/map', (req, res) => {
-
+  map.plotLocation(req.latitude, req.longitude)
+  .then((result) => {
+    res.status(200).send(result)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
 })
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-
