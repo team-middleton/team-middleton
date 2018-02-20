@@ -19,10 +19,17 @@
   "dependencies": {
     "angular": "^1.6.3",
     "axios": "^0.18.0",
+<<<<<<< HEAD
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jquery": "^3.3.1",
+=======
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.0",
+    "jquery": "^3.1.1",
+>>>>>>> saved changes; created yelp list, dummy data, and yelp list item component
     "mongoose": "^4.8.6",
     "mysql": "^2.13.0",
     "react": "^15.6.2",
