@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var bcrypt = require('bcrypt');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -17,6 +18,10 @@ var selectAll = function(callback) {
   });
 };
 
+var hashPass = function(value, callback){
+  //hashing function with bcrypt will go here
+}
+
 //possible helper functions: 
 
   //checking if user in the database
@@ -28,11 +33,11 @@ var selectAll = function(callback) {
 //
 
 
-
 connection.connect((err) => {
   if (err) { console.log('error connecting to db'); return; }
   console.log('connected to the db');
 });
 
 module.exports.connection = connection;
+
 module.exports.selectAll = selectAll;
