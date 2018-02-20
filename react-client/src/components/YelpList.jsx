@@ -20,12 +20,10 @@ class YelpList extends React.Component {
       console.log(this.state.YelpList);
     return (
     <div>
-      <h2> Yelp List</h2>
 
       {this.state.YelpList.map((business, i) => 
 
-
-          < YelpListItem  key={business.name} />
+          < YelpListItem  key={business.name} business={business} />
       )}
 
     </div>)
