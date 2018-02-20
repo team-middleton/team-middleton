@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var bcrypt = require('bcrypt');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -16,5 +17,9 @@ var selectAll = function(callback) {
     }
   });
 };
+
+var hashPass = function(value, callback){
+  //hashing function with bcrypt will go here
+}
 
 module.exports.selectAll = selectAll;
