@@ -10,40 +10,48 @@ class YelpList extends React.Component {
     super(props);
     this.state = { 
         YelpList: YelpDummyData,
-        serviceQuery: ''
+        serviceQuery: 'movers'
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+
+    
+  }
+
+  getYelpServices () {
+    
   }
 
   handleChange(e) {
-    console.log('e target value ', e.target.value)
+    // when dropdown value changes, it updates serviceQuery to that value
     this.setState({
       serviceQuery: e.target.value
-    })
-    this.handleSubmit(e);
-    this.setState({
-      serviceQuery: e.target.value
-    })
-  }
+    }, () => {
+      // this serviceQuery value then is used as query term to yelp
+      axios.post('services', {
+        queryTerm: this.state.serviceQuery
+      })
+      // we then set the data from our post request to YelpList values
+      .then(function(response){
+        this.setState({
+          YelpList: response
+        })
+      })
+    }) 
 
-  handleSubmit(e) {
-    console.log('selected service is ', this.state.serviceQuery);
-    e.preventDefault();
-  }
 
   render () {
-      console.log(this.state.YelpList);
     return (
     <div>
-      <form onSubmit={this.handleSubmit} type="submit" value="Submit" >
-        <select value={this.state.serviceQuery} onChange={this.handleChange} >
+      <form type="submit" value="Submit" >
+        <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
           <option value ="movers"> Movers </option>
           <option value ="supplies"> Supplies </option>
           <option value ="supplies"> Truck rental </option>
           <option value ="storage"> Storage </option>
         </select>
       </form>
+      
       {this.state.YelpList.map((business, i) => 
 
           < YelpListItem  key={business.name} business={business} />
