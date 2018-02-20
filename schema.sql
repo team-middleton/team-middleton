@@ -1,15 +1,29 @@
-DROP DATABASE IF EXISTS test;
+DROP DATABASE IF EXISTS moving;
 
-CREATE DATABASE test;
+CREATE DATABASE moving;
 
-USE test;
+USE moving;
 
-CREATE TABLE items (
+CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+  username varchar(50) NOT NULL,
+  password varchar(50) NOT NULL,
+  zipcodefrom integer NOT NULL,
+  zipcodeto integer NOT NULL,
+  totalbudget integer,
+  PRIMARY KEY (id)
 );
+
+CREATE TABLE todos (
+  id int NOT NULL AUTO_INCREMENT,
+  user integer NOT NULL REFERENCES users(id),
+  task varchar(255) NOT NULL,
+  price int,
+  complete boolean NOT NULL default 0,
+  searchterm varchar(255),
+  PRIMARY KEY (id)
+);
+
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
