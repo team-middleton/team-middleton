@@ -166,7 +166,7 @@ app.post('/expenses', (req, res) => {
   )
 })
 
-app.get('/services', (req, res) => {
+app.get('/yelpRequest', (req, res) => {
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
   		Authorization : `Bearer ${APIKey.yelpAPI}`

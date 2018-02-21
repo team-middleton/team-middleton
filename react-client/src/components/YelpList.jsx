@@ -20,7 +20,7 @@ class YelpList extends React.Component {
 
   getYelpServices () {
     //this gets data from yelp based on our seach terms for services
-    axios.get('/services', {
+    axios.get('/yelpRequest', {
       params: {
         term: this.state.serviceQuery,
         location: this.state.location
@@ -72,7 +72,7 @@ class YelpList extends React.Component {
         isMarkerShown
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
+        containerElement={<div style={{ height: `200px` }} />}
         mapElement={<div style={{ height: `100%` }}/>}
         latitude={37.80587}
         longitude={-122.42058}
