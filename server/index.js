@@ -15,19 +15,41 @@ app.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     var user = req.body.username
     var pass = req.body.password
+    var zipcodefrom = req.body.zipcodefrom
     db.connection.query(
-      `SELECT * FROM users WHERE username = ${user}`,
+      `SELECT * FROM users WHERE username = '${user}'`,
       function(err, results) {
         if (err) console.error(err);
-        if (results.length === 0) {
+        if (results.length === 0) { 
           bcrypt.hash(pass, null, null, (err, hash) => {
             if (err) console.error(err)
             db.connection.query(
-              `INSERT INTO users (id, username, password, zipcodefrom, zipcodeto, totalbudget) VALUES (?, ?, ?, ?, ?, ?)`,
-              [null, user, hash, null, null, null], 
+              `INSERT INTO users (id, username, password, zipcodefrom, totalbudget) VALUES (?, ?, ?, ?, ?)`,
+              [null, user, hash, zipcodefrom, null, null], 
               function(err) {
                 if (err) console.error(err)
-                res.status(200).send(/*affirmative*/)
+                db.connection.query(
+                  `SELECT id FROM users WHERE username = '${user}'`,
+                  function(err, results) {
+                    if (err) { console.error(err) }
+                    var id = results[0].id            
+                    db.connection.query(
+                      `INSERT INTO todos (id, user, task, price, complete, searchterm) VALUES 
+                      (null, ${id}, 'End your lease', null, 0, null),
+                      (null, ${id}, 'Buy packing supplies', 50, 0, null),   
+                      (null, ${id}, 'Pack your things', null, 0, null),
+                      (null, ${id}, 'Hire movers or rent a truck', 200, 0, null),
+                      (null, ${id}, 'Pack the truck', null, 0, null),
+                      (null, ${id}, 'Clean your old place', null, 0, null),
+                      (null, ${id}, 'Drive the truck', null, 0, null),
+                      (null, ${id}, 'Unpack and enjoy your new home!', null, 0, null)`, 
+                      function(err) {
+                        if (err) console.error(err)
+                        res.status(201).send(/*affirmative*/)
+                      } 
+                    )
+                  }
+                )
               }
             )
           })

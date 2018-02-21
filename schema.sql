@@ -7,9 +7,8 @@ USE moving;
 CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   username varchar(50) NOT NULL,
-  password varchar(50) NOT NULL,
+  password varchar(100) NOT NULL,
   zipcodefrom integer NOT NULL,
-  zipcodeto integer NOT NULL,
   totalbudget integer,
   PRIMARY KEY (id)
 );
