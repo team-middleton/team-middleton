@@ -3,7 +3,14 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
 var APIKey = require('./yelpAPI.js');
+<<<<<<< HEAD
 var axios = require('axios');
+=======
+var utilsMethods = require('./utils.js');
+
+var axios = require('axios');
+
+>>>>>>> successfully send get request from change in dropdown from client; next must include zip code
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -99,7 +106,6 @@ app.post('/budget', (req, res) => {
 })
 
 app.get('/services', (req, res) => {
-	console.log("INSIDE SERVER", req.query)
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
   		Authorization : `Bearer ${APIKey.yelpAPI}`
@@ -112,10 +118,13 @@ app.get('/services', (req, res) => {
   	}
   })
   .then((response) => {
-  	res.send(response.data)
+    // console.log('this is res ', response);
+    var cleanedData = utilsMethods.dataCleaner(response.data.businesses)
+    res.status(200)
+  	res.send(cleanedData)
   })
   .catch((err) => {
-    console.error(err)
+    console.error('err', err)
   })
 })
 
