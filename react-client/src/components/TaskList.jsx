@@ -6,18 +6,23 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tasks = []
+      tasks = [],
+      userInput = ''
     }
   }
 
   componentDidMount() {
+    this.refreshList()
+  }
+
+  refreshList() {
     axios.get('/tasks', {
       params: {
         user: this.props.user
       }
     })
     .then((response) => {
-
+      this.setState({tasks: response})
     })
     .catch((err) => {
       console.error(err)
@@ -32,7 +37,7 @@ class TaskList extends React.Component {
       complete: false
     })
     .then((response) => {
-
+      this.refreshList()
     })
     .catch((err) => {
       console.error(err)
@@ -47,7 +52,7 @@ class TaskList extends React.Component {
       }
     })
     .then((response) => {
-
+      this.refreshList()
     })
     .catch((err) => {
       console.error(err)
@@ -64,10 +69,10 @@ class TaskList extends React.Component {
   assignCost(task, cost) {
     axios.post('/budget', {
       task: task,
-      cost: cost
+      cost: parseInt(cost)
     })
     .then((response) => {
-
+      this.refreshList()
     })
     .catch((err) => {
       console.error(err)
@@ -75,6 +80,21 @@ class TaskList extends React.Component {
   }
 
   render() {
-    
+    <div>
+      <div>
+        {this.state.tasks.map((task) => {
+          <Task 
+          task = {task}
+          removeTask = {this.removeTask}
+          markCompleted = {this.markCompleted}
+          assignCost = {this.assignCost}
+          />
+        })}
+      </div>
+      <form>
+        <input type="text" value={this.state.userInput} onChange={(event => this.setState({userInput: event.target.value}))}/>
+        <button type="submit" value="Add Task" onClick={this.addTask}/>
+      </form>
+    </div>
   }
 }
