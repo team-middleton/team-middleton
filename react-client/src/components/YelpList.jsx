@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import YelpDummyData from './YelpDummyData.jsx';
 import YelpListItem from './YelpListItem.jsx';
+import GoogleMap from './GoogleMap.jsx';
 
 
 class YelpList extends React.Component {
@@ -22,7 +23,7 @@ class YelpList extends React.Component {
     axios.get('/services', {
       params: {
         term: this.state.serviceQuery,
-        location: '02140'
+        location: this.state.location
       }
     })
     //location needs to be helper function from the database
@@ -67,9 +68,10 @@ class YelpList extends React.Component {
       </form>
       
       {this.state.YelpList.map((business, i) => 
-
           < YelpListItem  key={business.name} business={business} />
       )}
+
+      <GoogleMap location={this.state.location} />
 
     </div>)
   }

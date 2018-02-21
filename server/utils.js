@@ -14,6 +14,9 @@ utilsMethods.dataCleaner= function (dataArray) {
         newBusiness.rating = dataArray[i].rating;
         newBusiness.phone = dataArray[i].phone;
         newBusiness.image_url = dataArray[i].image_url;
+        newBusiness.url = dataArray[i].url;
+        // TO FIX: save yelp's display_address array instead of the breakdown below
+        // update this on front end 
         newBusiness.address = {
             city: dataArray[i].location.city,
             state: dataArray[i].location.state,
