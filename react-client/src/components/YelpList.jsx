@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import YelpDummyData from './YelpDummyData.jsx';
 import YelpListItem from './YelpListItem.jsx';
-import GoogleMap from './GoogleMap.jsx';
+import GoogleMaps from './GoogleMap.jsx';
 
 
 class YelpList extends React.Component {
@@ -46,12 +46,9 @@ class YelpList extends React.Component {
     // when dropdown value changes, it updates serviceQuery to that value
     this.setState({
       serviceQuery: e.target.value
-    }
-    , () => {
+    }, () => {
       this.getYelpServices()
-    }
-    ) 
-    // this.getYelpServices()
+    }) 
   }
 
 
@@ -71,7 +68,15 @@ class YelpList extends React.Component {
           < YelpListItem  key={business.name} business={business} />
       )}
 
-      <GoogleMap location={this.state.location} />
+      <GoogleMaps 
+        isMarkerShown
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `400px` }} />}
+        mapElement={<div style={{ height: `100%` }}/>}
+        latitude={37.80587}
+        longitude={-122.42058}
+        />
 
     </div>)
   }
