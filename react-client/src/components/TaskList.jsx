@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Task from '../components/Task.jsx';
 
 class TaskList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tasks = [],
-      userInput = '',
-      budget = '',
-      total = tasks.reduce((acc, task) => {
+      tasks: [],
+      userInput: '',
+      budget: '',
+      total: tasks.reduce((acc, task) => {
         if (task.price) {
           acc += task.price
         }
