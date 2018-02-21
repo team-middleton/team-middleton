@@ -109,7 +109,7 @@ app.post('/login', (req, res) => {
 
 app.get('/tasks', (req, res) => {
   db.connection.query(
-    `SELECT * FROM todos WHERE id = '${req.session.userId}'`,
+    `SELECT * FROM todos WHERE user = '${req.session.userId}'`,
     function(err, data) {
       if(err) console.error(err)
       res.status(200).send(data)
