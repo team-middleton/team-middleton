@@ -10,7 +10,8 @@ class YelpList extends React.Component {
     super(props);
     this.state = { 
         YelpList: YelpDummyData,
-        serviceQuery: 'movers'
+        serviceQuery: 'movers',
+        location: '02140'
     }
     this.handleChange = this.handleChange.bind(this);
     this.getYelpServices = this.getYelpServices.bind(this);
@@ -20,10 +21,13 @@ class YelpList extends React.Component {
     //this gets data from yelp based on our seach terms for services
     axios.get('/services', {
       params: {
-        term: this.state.serviceQuery
+        term: this.state.serviceQuery,
+        location: '02140'
       }
     })
-    .then(function(response){
+    //location needs to be helper function from the database
+    .then((response) => {
+      console.log("RESPONSE IN YELP", response)
       this.setState({
         YelpList: response
       })
@@ -31,6 +35,7 @@ class YelpList extends React.Component {
   }
 
   componentDidMount() {
+    // set state to zip code from helper function from the database
     this.getYelpServices();
   }
 
