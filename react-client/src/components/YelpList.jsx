@@ -13,13 +13,25 @@ class YelpList extends React.Component {
         serviceQuery: 'movers'
     }
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-
-    
+    this.getYelpServices = this.getYelpServices.bind(this);
   }
 
   getYelpServices () {
-    
+    //this gets data from yelp based on our seach terms for services
+    axios.get('/services', {
+      params: {
+        term: this.state.serviceQuery
+      }
+    })
+    .then(function(response){
+      this.setState({
+        YelpList: response
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.getYelpServices();
   }
 
   handleChange(e) {
@@ -28,16 +40,10 @@ class YelpList extends React.Component {
       serviceQuery: e.target.value
     }, () => {
       // this serviceQuery value then is used as query term to yelp
-      axios.post('services', {
-        queryTerm: this.state.serviceQuery
-      })
-      // we then set the data from our post request to YelpList values
-      .then(function(response){
-        this.setState({
-          YelpList: response
-        })
-      })
+      this.getYelpServices()
+      console.log('new yelp state: ', this.state.YelpList);
     }) 
+  }
 
 
   render () {
@@ -47,7 +53,7 @@ class YelpList extends React.Component {
         <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
           <option value ="movers"> Movers </option>
           <option value ="supplies"> Supplies </option>
-          <option value ="supplies"> Truck rental </option>
+          <option value ="truck rental"> Truck rental </option>
           <option value ="storage"> Storage </option>
         </select>
       </form>
