@@ -107,7 +107,7 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.get('/tasks', (req, res) => {
+app.get('/tasks', checkSession, (req, res) => {
   db.connection.query(
     `SELECT * FROM todos WHERE user = '${req.session.userId}'`,
     function(err, data) {
@@ -117,7 +117,7 @@ app.get('/tasks', (req, res) => {
   )
 })
 
-app.post('/tasks', (req, res) => {
+app.post('/tasks', checkSession, (req, res) => {
   db.connection.query(
     `INSERT INTO todos (id, user, task, price, complete, searchterm) VALUES (?, ?, ?, ?, ?, ?)`,
     [null, req.session.userId, req.body.task, req.body.cost, req.body.complete, null],
@@ -128,7 +128,7 @@ app.post('/tasks', (req, res) => {
   )
 })
 
-app.delete('/tasks', (req, res) => {
+app.delete('/tasks', checkSession, (req, res) => {
   `DELETE FROM tasks WHERE id = '${req.params.taskId}'`,
   function(err) {
     if (err) console.error(err)
@@ -136,7 +136,7 @@ app.delete('/tasks', (req, res) => {
   }
 })
 
-app.post('/budget', (req, res) => {
+app.post('/budget', checkSession, (req, res) => {
   db.connection.query(
     `UPDATE users SET totalbudget = '${req.body.budget}' WHERE id = '${req.session.userId}'`,
     function(err) {
@@ -146,7 +146,7 @@ app.post('/budget', (req, res) => {
   )
 })
 
-app.post('/checklist', (req, res) => {
+app.post('/checklist', checkSession, (req, res) => {
   db.connection.query(
     `UPDATE todos SET complete = 'true' WHERE id = '${req.body.taskId}'`,
     function(err) {
@@ -156,7 +156,7 @@ app.post('/checklist', (req, res) => {
   )
 })
 
-app.post('/expenses', (req, res) => {
+app.post('/expenses', checkSession, (req, res) => {
   db.connection.query(
     `UPDATE todos SET price = '${req.body.cost}' WHERE id = '${req.body.taskId}'`,
     function(err) {
@@ -166,7 +166,7 @@ app.post('/expenses', (req, res) => {
   )
 })
 
-app.get('/yelpRequest', (req, res) => {
+app.get('/yelpRequest', checkSession, (req, res) => {
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
   		Authorization : `Bearer ${APIKey.yelpAPI}`
@@ -186,16 +186,6 @@ app.get('/yelpRequest', (req, res) => {
   })
   .catch((err) => {
     console.error('err', err)
-  })
-})
-
-app.get('/map', (req, res) => {
-  map.plotLocation(req.body.latitude, req.body.longitude)
-  .then((result) => {
-    res.status(200).send(result)
-  })
-  .catch((err) => {
-    console.error(err)
   })
 })
 
