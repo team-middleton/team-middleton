@@ -10,11 +10,7 @@ var axios = require('axios');
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
-<<<<<<< HEAD
-app.use(express.static(__dirname + 'assets'));
-=======
 app.use(express.static(__dirname + '/assets'));
->>>>>>> 7bda7900c57b98a70cfd7aca86ab84db3f7362b7
 app.use(bodyParser.json())
 app.use(session({
   resave: false, 
