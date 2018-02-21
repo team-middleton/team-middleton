@@ -99,6 +99,7 @@ app.post('/budget', (req, res) => {
 })
 
 app.get('/services', (req, res) => {
+	console.log("INSIDE SERVER", req.query)
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
   		Authorization : `Bearer ${APIKey.yelpAPI}`
@@ -111,7 +112,7 @@ app.get('/services', (req, res) => {
   	}
   })
   .then((response) => {
-  	res.status.send(response.data)
+  	res.send(response.data)
   })
   .catch((err) => {
     console.error(err)
