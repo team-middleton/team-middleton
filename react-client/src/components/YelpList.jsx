@@ -9,7 +9,7 @@ class YelpList extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-        YelpList: YelpDummyData,
+        YelpList: [],
         serviceQuery: 'movers',
         location: '02140'
     }
@@ -27,10 +27,12 @@ class YelpList extends React.Component {
     })
     //location needs to be helper function from the database
     .then((response) => {
-      console.log("RESPONSE IN YELP", response)
+      console.log('client response : ', response)
       this.setState({
-        YelpList: response
-      })
+        YelpList: response.data
+      },() => {
+        
+      }) 
     })
   }
 
@@ -43,11 +45,12 @@ class YelpList extends React.Component {
     // when dropdown value changes, it updates serviceQuery to that value
     this.setState({
       serviceQuery: e.target.value
-    }, () => {
-      // this serviceQuery value then is used as query term to yelp
+    }
+    , () => {
       this.getYelpServices()
-      console.log('new yelp state: ', this.state.YelpList);
-    }) 
+    }
+    ) 
+    // this.getYelpServices()
   }
 
 
