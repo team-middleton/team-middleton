@@ -133,3 +133,5 @@ class TaskList extends React.Component {
     </div>
   }
 }
+
+export default TaskList;

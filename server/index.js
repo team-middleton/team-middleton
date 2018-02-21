@@ -19,7 +19,14 @@ app.use(session({
   cookie: {maxAge : 600000}
 }));
 
-var checkSession = {}
+var checkSession = function(req, res, next) {
+  if (req.session.userId) {
+    next()
+  } else {
+    console.error('Must be logged in')
+    res.redirect('/')
+  }
+}
 
 app.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
