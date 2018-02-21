@@ -7,7 +7,7 @@ import YelpList from './YelpList.jsx';
 const Main = () => (
   <main>
     <Switch>
-      <Route path='/task' component={TaskList}/>
+      <Route path='/tasks' component={TaskList}/>
       <Route path='/services' component={YelpList}/>
     </Switch>
   </main>
