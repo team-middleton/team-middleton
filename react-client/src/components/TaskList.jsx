@@ -89,6 +89,19 @@ class TaskList extends React.Component {
     axios.post('/budget', {
       budget: budget
     })
+    .then((response) => {
+      this.getBudget()
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
+
+  getBudget() {
+    axios.get('/budget')
+    .then((response) => {
+      this.setState({budget: response})
+    })
     .catch((err) => {
       console.error(err)
     })
@@ -111,10 +124,12 @@ class TaskList extends React.Component {
           />
         })}
       </div>
+      <div>{this.state.total}</div>
       <form>
         <input type="test" value={this.state.budget} onChange={event => this.setState({budget: event.target.value})}/>
         <button type="submit" value="Input Budget" onClick={this.setBudget}/>
       </form>
+      <div>Difference: ${this.state.budget - this.state.total}</div>
     </div>
   }
 }
