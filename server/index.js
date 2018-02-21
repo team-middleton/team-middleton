@@ -1,20 +1,22 @@
 var express = require('express');
+var session = require('express-session')
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
 var APIKey = require('./yelpAPI.js');
-<<<<<<< HEAD
-var axios = require('axios');
-=======
 var utilsMethods = require('./utils.js');
-
 var axios = require('axios');
 
->>>>>>> successfully send get request from change in dropdown from client; next must include zip code
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json())
+app.use(session({
+  resave: false, 
+  saveUninitialized: false, 
+  secret: 'superSuperSecretString', 
+  cookie: {maxAge : 600000}
+}));
 
 var checkSession = {}
 
@@ -32,7 +34,7 @@ app.post('/signup', (req, res) => {
             if (err) console.error(err)
             db.connection.query(
               `INSERT INTO users (id, username, password, zipcodefrom, totalbudget) VALUES (?, ?, ?, ?, ?)`,
-              [null, user, hash, zipcodefrom, null, null], 
+              [null, user, hash, zipcodefrom, null], 
               function(err) {
                 if (err) console.error(err)
                 db.connection.query(
@@ -75,7 +77,7 @@ app.post('/login', (req, res) => {
     var user = req.body.username
     var pass = req.body.password
     db.connection.query(
-      `SELECT * FROM users WHERE username = ${user}`,
+      `SELECT * FROM users WHERE username = '${user}'`,
       function(err, results) {
         if (err) console.error(err);
         if (results.length > 0) {
@@ -97,19 +99,20 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.post('/userdata', (req, res) => {
+app.get('/tasks', (req, res) => {
   db.connection.query(
-    `UPDATE users SET zipcodefrom = ${req.zipcodefrom}, zipcodeto = ${req.zipcodeto} WHERE id = ${req.userId}`, 
-    function(err) {
-      if (err) console.error(err)
-      res.status(201).send()
+    `SELECT * FROM todos WHERE id = '${req.session.userId}'`,
+    function(err, data) {
+      if(err) console.error(err)
+      res.status(200).send(data)
     }
   )
 })
 
 app.post('/tasks', (req, res) => {
   db.connection.query(
-    `INSERT INTO tasks (id, user, task, price, complete, searchterm) VALUES (?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO todos (id, user, task, price, complete, searchterm) VALUES (?, ?, ?, ?, ?, ?)`,
+    [null, req.session.userId, req.body.task, req.body.cost, req.body.complete, null],
     function(err) {
       if (err) console.error(err)
       res.status(201).send()
@@ -117,9 +120,37 @@ app.post('/tasks', (req, res) => {
   )
 })
 
+app.delete('/tasks', (req, res) => {
+  `DELETE FROM tasks WHERE id = '${req.params.taskId}'`,
+  function(err) {
+    if (err) console.error(err)
+    res.status(202).send()
+  }
+})
+
 app.post('/budget', (req, res) => {
   db.connection.query(
-    `UPDATE users SET totalbudget = ${req.budget} WHERE id = ${req.userId}`,
+    `UPDATE users SET totalbudget = '${req.body.budget}' WHERE id = '${req.session.userId}'`,
+    function(err) {
+      if (err) console.error(err)
+      res.status(201).send()
+    }
+  )
+})
+
+app.post('/checklist', (req, res) => {
+  db.connection.query(
+    `UPDATE todos SET complete = 'true' WHERE id = '${req.body.taskId}'`,
+    function(err) {
+      if (err) console.error(err)
+      res.status(201).send()
+    }
+  )
+})
+
+app.post('/expenses', (req, res) => {
+  db.connection.query(
+    `UPDATE todos SET price = '${req.body.cost}' WHERE id = '${req.body.taskId}'`,
     function(err) {
       if (err) console.error(err)
       res.status(201).send()
@@ -151,7 +182,7 @@ app.get('/services', (req, res) => {
 })
 
 app.get('/map', (req, res) => {
-  map.plotLocation(req.latitude, req.longitude)
+  map.plotLocation(req.body.latitude, req.body.longitude)
   .then((result) => {
     res.status(200).send(result)
   })

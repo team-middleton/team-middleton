@@ -7,7 +7,14 @@ class TaskList extends React.Component {
     super(props)
     this.state = {
       tasks = [],
-      userInput = ''
+      userInput = '',
+      budget = '',
+      total = tasks.reduce((acc, task) => {
+        if (task.price) {
+          acc += task.price
+        }
+        return acc
+      }, 0)
     }
   }
 
@@ -16,11 +23,7 @@ class TaskList extends React.Component {
   }
 
   refreshList() {
-    axios.get('/tasks', {
-      params: {
-        user: this.props.user
-      }
-    })
+    axios.get('/tasks')
     .then((response) => {
       this.setState({tasks: response})
     })
@@ -29,9 +32,8 @@ class TaskList extends React.Component {
     })
   }
 
-  addTask(user, task) {
+  addTask(task) {
     axios.post('/tasks', {
-      user: user,
       task: task,
       cost: 0,
       complete: false
@@ -44,11 +46,10 @@ class TaskList extends React.Component {
     })
   }
 
-  removeTask(user, task) {
+  removeTask(taskId) {
     axios.delete('/tasks', {
       params: {
-        user: user,
-        task: task
+        taskId: taskId
       }
     })
     .then((response) => {
@@ -59,16 +60,21 @@ class TaskList extends React.Component {
     })
   }
 
-  markCompleted(user, task) {
+  markCompleted(taskId) {
     axios.post('/checklist', {
-      user: user,
-      task: task
+      taskId: taskId
+    })
+    .then((response) => {
+      this.refreshList()
+    })
+    .catch((err) => {
+      console.error(err)
     })
   }
 
-  assignCost(task, cost) {
-    axios.post('/budget', {
-      task: task,
+  assignCost(taskId, cost) {
+    axios.post('/expenses', {
+      taskId: taskId,
       cost: parseInt(cost)
     })
     .then((response) => {
@@ -79,11 +85,25 @@ class TaskList extends React.Component {
     })
   }
 
+  setBudget(budget) {
+    axios.post('/budget', {
+      budget: budget
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
+
   render() {
     <div>
+      <form>
+        <input type="text" value={this.state.userInput} onChange={event => this.setState({userInput: event.target.value})}/>
+        <button type="submit" value="Add Task" onClick={this.addTask}/>
+      </form>
       <div>
         {this.state.tasks.map((task) => {
           <Task 
+          id = {task.id}
           task = {task}
           removeTask = {this.removeTask}
           markCompleted = {this.markCompleted}
@@ -92,8 +112,8 @@ class TaskList extends React.Component {
         })}
       </div>
       <form>
-        <input type="text" value={this.state.userInput} onChange={(event => this.setState({userInput: event.target.value}))}/>
-        <button type="submit" value="Add Task" onClick={this.addTask}/>
+        <input type="test" value={this.state.budget} onChange={event => this.setState({budget: event.target.value})}/>
+        <button type="submit" value="Input Budget" onClick={this.setBudget}/>
       </form>
     </div>
   }

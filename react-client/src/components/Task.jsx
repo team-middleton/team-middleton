@@ -11,13 +11,13 @@ class Task extends React.Component {
 
   render() {
     <div class="task">
-      <input type="checkBox" onClick={this.props.markCompleted}/>
+      <input type="checkBox" onClick={this.props.markCompleted(this.props.id)}/>
       <div>{this.props.task}</div>
       <form>
         <input type="text" value={this.state.userInput} onChange={this.setState({userInput: event.target.value})}/>
-        <input type="submit" value="Input Cost" onClick={this.props.assignCost}/>
+        <input type="submit" value="Input Cost" onClick={this.props.assignCost(this.props.id, this.state.userInput)}/>
       </form>
-      <button onClick={this.props.removeTask}>Remove</button>
+      <button onClick={this.props.removeTask(this.props.id)}>Remove</button>
     </div>
   }
 }
