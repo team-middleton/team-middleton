@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
 var APIKey = require('./yelpAPI.js');
+var axios = require('axios');
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -105,7 +106,7 @@ app.get('/services', (req, res) => {
   	params: {
   		term: req.query.term,
   		location: req.query.location,
-  		sort_by: distance,
+  		sort_by: 'distance',
   		limit: 10
   	}
   })
