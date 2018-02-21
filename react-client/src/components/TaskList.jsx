@@ -6,23 +6,34 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+<<<<<<< HEAD
       tasks = [],
       userInput = ''
+=======
+      tasks = []
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
     }
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     this.refreshList()
   }
 
   refreshList() {
+=======
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
     axios.get('/tasks', {
       params: {
         user: this.props.user
       }
     })
     .then((response) => {
+<<<<<<< HEAD
       this.setState({tasks: response})
+=======
+
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
     })
     .catch((err) => {
       console.error(err)
@@ -37,7 +48,11 @@ class TaskList extends React.Component {
       complete: false
     })
     .then((response) => {
+<<<<<<< HEAD
       this.refreshList()
+=======
+
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
     })
     .catch((err) => {
       console.error(err)
@@ -52,7 +67,11 @@ class TaskList extends React.Component {
       }
     })
     .then((response) => {
+<<<<<<< HEAD
       this.refreshList()
+=======
+
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
     })
     .catch((err) => {
       console.error(err)
@@ -69,10 +88,17 @@ class TaskList extends React.Component {
   assignCost(task, cost) {
     axios.post('/budget', {
       task: task,
+<<<<<<< HEAD
       cost: parseInt(cost)
     })
     .then((response) => {
       this.refreshList()
+=======
+      cost: cost
+    })
+    .then((response) => {
+
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
     })
     .catch((err) => {
       console.error(err)
@@ -80,6 +106,7 @@ class TaskList extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     <div>
       <div>
         {this.state.tasks.map((task) => {
@@ -96,5 +123,8 @@ class TaskList extends React.Component {
         <button type="submit" value="Add Task" onClick={this.addTask}/>
       </form>
     </div>
+=======
+    
+>>>>>>> fac699dcd6163359311f4f5701f44d9eb0d79aca
   }
 }
