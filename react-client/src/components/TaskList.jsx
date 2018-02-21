@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Task from './Task.jsx';
+<<<<<<< HEAD
 
+=======
+>>>>>>> Got Task List to render
 
 class TaskList extends React.Component {
   constructor(props) {
