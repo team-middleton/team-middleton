@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Task from '../components/Task.jsx';
+import Task from './Task.jsx';
 
 
 class TaskList extends React.Component {
@@ -11,20 +11,17 @@ class TaskList extends React.Component {
       tasks: [],
       userInput: '',
       budget: '',
-      total: tasks.reduce((acc, task) => {
-        if (task.price) {
-          acc += task.price
-        }
-        return acc
-      }, 0)
     }
+    console.log('constructor function ran')
   }
 
   componentDidMount() {
-    this.refreshList()
+    console.log('component did mount')
+    // this.refreshList()
   }
 
   refreshList() {
+    // console.log('refreshList is running')
     axios.get('/tasks')
     .then((response) => {
       this.setState({tasks: response})
@@ -109,11 +106,20 @@ class TaskList extends React.Component {
     })
   }
 
+  calcTotal() {
+    return this.state.tasks.reduce((acc, task) => {
+      if (task.price) {
+        acc += task.price
+      }
+      return acc
+    }, 0)
+  }
+
   render() {
-    <div>
+    return <div>
       <form>
         <input type="text" value={this.state.userInput} onChange={event => this.setState({userInput: event.target.value})}/>
-        <button type="submit" value="Add Task" onClick={this.addTask}/>
+        <button type="submit" onClick={this.addTask}>Add Task</button>
       </form>
       <div>
         {this.state.tasks.map((task) => {
@@ -129,9 +135,9 @@ class TaskList extends React.Component {
       <div>{this.state.total}</div>
       <form>
         <input type="test" value={this.state.budget} onChange={event => this.setState({budget: event.target.value})}/>
-        <button type="submit" value="Input Budget" onClick={this.setBudget}/>
+        <button type="submit" onClick={this.setBudget}>Input Budget</button>
       </form>
-      <div>Difference: ${this.state.budget - this.state.total}</div>
+      <div>Difference: ${this.state.budget - this.calcTotal()}</div>
     </div>
   }
 }
