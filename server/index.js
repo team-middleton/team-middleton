@@ -3,7 +3,10 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
 var APIKey = require('./yelpAPI.js');
+<<<<<<< HEAD
 var axios = require('axios');
+=======
+>>>>>>> set up get request functionality to coordinate with allegra
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
