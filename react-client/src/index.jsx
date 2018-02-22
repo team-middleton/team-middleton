@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header.jsx';
-import Truckin from '.components/Truckin.jsx';
+import Truckin from './components/Truckin.jsx';
 import Main from './components/Main.jsx';
 import Logout from './components/Logout.jsx';
 // import homeHeader from './components/homeHeader.jsx';
