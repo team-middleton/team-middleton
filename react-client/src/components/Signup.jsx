@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 
 class Signup extends React.Component {
 	constructor(props){
@@ -8,30 +9,30 @@ class Signup extends React.Component {
 			password: '',
 			zipcode: 0
 		}
-		this.onChange = this.onChange.bind(this);
 		this.signup = this.signup.bind(this);
 	}
 
-	onChange(e){
-		e.preventDefault();
-		//set state to the user's input
-		this.setState({
-			e.target.id: e.target.value
+	signup() {
+		axios.post('/signup', {
+			username: this.state.username,
+			password: this.state.password,
+			zipcodefrom: this.state.zipcode
 		})
-	}
-
-	signup(e) {
-		e.preventDefault();
-		//send the state on
+		.then((response) => {
+			//route them somewhere
+		})
+		.catch((error) => {
+			console.error(error)
+		})
 	}
 
 	render(){
 		return(<div>
 			<form>
-			Username: <input value={this.state.username} onChange(e) => {this.onChange(e)}/>
-			Password: <input value={this.state.password} onChange(e) => {this.onChange(e)}/>
-			Zipcode: <input value={this.state.zipcode} onChange(e) => {this.onChange(e)}/>
-			<button onClick={this.signup}>Signup</button>
+			Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
+			Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
+			Zipcode: <input value={this.state.zipcode} onChange={(event) => this.setState({zipcode: event.target.value})}/>
+			<button type="submit" onClick={this.signup}>Sign Up!</button>
 			</form>
 		</div>)
 	}
