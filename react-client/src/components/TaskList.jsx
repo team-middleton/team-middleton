@@ -14,13 +14,15 @@ class TaskList extends React.Component {
   }
 
   componentDidMount() {
+    console.log('component did mount')
     this.refreshList()
   }
 
   refreshList() {
     axios.get('/tasks')
     .then((response) => {
-      this.setState({tasks: response})
+      console.log('got tasks', response)
+      this.setState({tasks: response.data})
     })
     .catch((err) => {
       console.error(err)
@@ -116,20 +118,23 @@ class TaskList extends React.Component {
 
   render() {
     if (this.state.tasks.length > 0) {
+      console.log('this state tasks ', this.state.tasks)
       return (
+        
         <div>
           <form>
             <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
             <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
           </form>
           <div>
-            {this.state.tasks.map((task) => {
-              <Task 
+            {this.state.tasks.map((task, index) => {
+              return <Task 
+              key = {index}
               id = {task.id}
-              task = {task}
-              removeTask = {this.removeTask}
-              markCompleted = {this.markCompleted}
-              assignCost = {this.assignCost}
+              task = {task.task}
+              removeTask = {this.removeTask.bind(this)}
+              markCompleted = {this.markCompleted.bind(this)}
+              assignCost = {this.assignCost.bind(this)}
               />
             })}
           </div>
