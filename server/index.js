@@ -24,15 +24,14 @@ var checkSession = function(req, res, next) {
     next()
   } else {
     console.error('Must be logged in')
-    res.redirect('/')
   }
 }
 
 app.post('/signup', (req, res) => {
-  if (req.body.username && req.body.password) {
+  if (req.body.username && req.body.password && req.body.zipcode) {
     var user = req.body.username
     var pass = req.body.password
-    var zipcodefrom = req.body.zipcodefrom
+    var zipcode = req.body.zipcode
     db.connection.query(
       `SELECT * FROM users WHERE username = '${user}'`,
       function(err, results) {
@@ -42,7 +41,7 @@ app.post('/signup', (req, res) => {
             if (err) console.error(err)
             db.connection.query(
               `INSERT INTO users (id, username, password, zipcodefrom, totalbudget) VALUES (?, ?, ?, ?, ?)`,
-              [null, user, hash, zipcodefrom, null], 
+              [null, user, hash, zipcode, null], 
               function(err) {
                 if (err) console.error(err)
                 db.connection.query(
@@ -53,16 +52,16 @@ app.post('/signup', (req, res) => {
                     db.connection.query(
                       `INSERT INTO todos (id, user, task, price, complete, searchterm) VALUES 
                       (null, ${id}, 'End your lease', null, 0, null),
-                      (null, ${id}, 'Buy packing supplies', 50, 0, null),   
+                      (null, ${id}, 'Buy packing supplies', 0, 0, null),   
                       (null, ${id}, 'Pack your things', null, 0, null),
-                      (null, ${id}, 'Hire movers or rent a truck', 200, 0, null),
+                      (null, ${id}, 'Hire movers or rent a truck', 0, 0, null),
                       (null, ${id}, 'Pack the truck', null, 0, null),
                       (null, ${id}, 'Clean your old place', null, 0, null),
                       (null, ${id}, 'Drive the truck', null, 0, null),
                       (null, ${id}, 'Unpack and enjoy your new home!', null, 0, null)`, 
                       function(err) {
                         if (err) console.error(err)
-                        res.status(201).send(/*affirmative*/)
+                        res.status(201).send()
                       } 
                     )
                   }
@@ -92,7 +91,7 @@ app.post('/login', (req, res) => {
           bcrypt.compare(pass, results[0].password, function(err, exists) {
             if (exists) {
               req.session.userId = results[0].id
-              res.status(201).send(/*affirmative*/)
+              res.send()
             } else {
               res.status(403).send(/*negative*/)
             }
@@ -105,6 +104,16 @@ app.post('/login', (req, res) => {
   } else {
     res.status(403).send(/*negative*/)
   }
+})
+
+app.get('/logout', checkSession, (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err)
+    } else {
+      res.status(202).send()
+    }
+  })
 })
 
 app.get('/tasks', checkSession, (req, res) => {
@@ -166,6 +175,16 @@ app.post('/expenses', checkSession, (req, res) => {
   )
 })
 
+app.get('/zipcode', checkSession, (req, res) => {
+  db.connection.query(
+    `SELECT zipcodefrom FROM users WHERE id = '${req.session.userId}'`,
+    function(err, data) {
+      if (err) console.error(err)
+      res.status(200).send(data)
+    }
+  )
+})
+
 app.get('/yelpRequest', checkSession, (req, res) => {
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
@@ -175,7 +194,7 @@ app.get('/yelpRequest', checkSession, (req, res) => {
   		term: req.query.term,
   		location: req.query.location,
   		sort_by: 'distance',
-  		limit: 10
+  		limit: 5
   	}
   })
   .then((response) => {
@@ -185,7 +204,7 @@ app.get('/yelpRequest', checkSession, (req, res) => {
   	res.send(cleanedData)
   })
   .catch((err) => {
-    console.error('err', err)
+    console.error(err)
   })
 })
 

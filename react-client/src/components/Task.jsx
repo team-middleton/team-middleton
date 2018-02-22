@@ -10,15 +10,17 @@ class Task extends React.Component {
   }
 
   render() {
-    <div class="task">
-      <input type="checkBox" onClick={this.props.markCompleted(this.props.id)}/>
-      <div>{this.props.task}</div>
-      <form>
-        <input type="text" value={this.state.userInput} onChange={this.setState({userInput: event.target.value})}/>
-        <input type="submit" value="Input Cost" onClick={this.props.assignCost(this.props.id, this.state.userInput)}/>
-      </form>
-      <button onClick={this.props.removeTask(this.props.id)}>Remove</button>
-    </div>
+    return (
+      <div className="task">
+        <input type="checkBox" onClick={() => {this.props.markCompleted(this.props.id)}}/>
+        <div>{this.props.task}</div>
+        <form>
+          <input type="text" value={this.state.userInput} onChange={(event) => {this.setState({userInput: event.target.value})}}/>
+          <input type="submit" value="Input Cost" onClick={(event) => {this.props.assignCost(event, this.props.id, this.state.userInput)}}/>
+        </form>
+        <button onClick={() => {this.props.removeTask(this.props.id)}}>Remove</button>
+      </div>
+    )
   }
 }
 

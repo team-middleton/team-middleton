@@ -12,10 +12,13 @@ class YelpList extends React.Component {
     this.state = { 
         YelpList: [],
         serviceQuery: 'movers',
-        location: '02140'
+        location: '10538',
+        map: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.getYelpServices = this.getYelpServices.bind(this);
+    this.getZipCodeServices = this.getZipCodeServices.bind(this);
+
   }
 
   getYelpServices () {
@@ -28,11 +31,13 @@ class YelpList extends React.Component {
     })
     //location needs to be helper function from the database
     .then((response) => {
-      console.log('client response : ', response)
+      console.log('yelp data ', response.data)
+      // console.log('client response : ', response)
       this.setState({
-        YelpList: response.data
+
+        YelpList: response.data,
+        map: true
       },() => {
-        
       }) 
     })
     .catch((err) => {
@@ -40,9 +45,23 @@ class YelpList extends React.Component {
     })
   }
 
+
+  getZipCodeServices () {
+    // get zip code from the user
+    axios.get('/zipcode')
+    .then( (response) => {
+      this.setState({
+        //put the retrieve zip code from state
+        location: response.data[0].zipcodefrom
+      }, () =>{
+        //once we have the zip code in state, get new yelp data for it
+        this.getYelpServices()
+      })
+    }) 
+  }
+
   componentDidMount() {
-    // set state to zip code from helper function from the database
-    this.getYelpServices();
+    this.getZipCodeServices();
   }
 
   handleChange(e) {
@@ -56,32 +75,45 @@ class YelpList extends React.Component {
 
 
   render () {
+    var mapComponent;
+    if (this.state.map) {
+      mapComponent = 
+              <GoogleMaps 
+          isMarkerShown
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `200px`}} />}
+          mapElement={<div style={{ height: `100%` }}/>}
+          businesses={this.state.YelpList}
+          />
+    } else {
+      mapComponent = null
+    }
+
+
     return (
-    <div>
-      <form type="submit" value="Submit" >
-        <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
-          <option value ="movers"> Movers </option>
-          <option value ="supplies"> Supplies </option>
-          <option value ="truck rental"> Truck rental </option>
-          <option value ="storage"> Storage </option>
-        </select>
-      </form>
-      
-      {this.state.YelpList.map((business, i) => 
-          < YelpListItem  key={business.name} business={business} />
-      )}
+    <div style={{
+      float:'left'
+    }}> 
+      <div>
+        <form type="submit" value="Submit" >
+          <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
+            <option value ="movers"> Movers </option>
+            <option value ="supplies"> Supplies </option>
+            <option value ="truck rental"> Truck rental </option>
+            <option value ="storage"> Storage </option>
+          </select>
+        </form>
+        
+        {this.state.YelpList.map((business, i) => 
+            < YelpListItem  key={business.name} business={business} />
+        )}
+        </div>
+        
+        {mapComponent}
 
-      <GoogleMaps 
-        isMarkerShown
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `200px` }} />}
-        mapElement={<div style={{ height: `100%` }}/>}
-        latitude={37.80587}
-        longitude={-122.42058}
-        />
-
-    </div>)
+    </div>
+    )
   }
 }
 

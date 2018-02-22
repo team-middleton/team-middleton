@@ -11,28 +11,28 @@ class TaskList extends React.Component {
       userInput: '',
       budget: '',
     }
-    console.log('constructor function ran')
   }
 
   componentDidMount() {
     console.log('component did mount')
-    // this.refreshList()
+    this.refreshList()
   }
 
   refreshList() {
-    // console.log('refreshList is running')
     axios.get('/tasks')
     .then((response) => {
-      this.setState({tasks: response})
+      console.log('got tasks', response)
+      this.setState({tasks: response.data})
     })
     .catch((err) => {
       console.error(err)
     })
   }
 
-  addTask(task) {
+  addTask(event) {
+    event.preventDefault()
     axios.post('/tasks', {
-      task: task,
+      task: this.state.userInput,
       cost: 0,
       complete: false
     })
@@ -70,7 +70,8 @@ class TaskList extends React.Component {
     })
   }
 
-  assignCost(taskId, cost) {
+  assignCost(event, taskId, cost) {
+    event.preventDefault()
     axios.post('/expenses', {
       taskId: taskId,
       cost: parseInt(cost)
@@ -83,9 +84,10 @@ class TaskList extends React.Component {
     })
   }
 
-  setBudget(budget) {
+  setBudget(event) {
+    event.preventDefault()
     axios.post('/budget', {
-      budget: budget
+      budget: this.state.budget
     })
     .then((response) => {
       this.getBudget()
@@ -115,29 +117,40 @@ class TaskList extends React.Component {
   }
 
   render() {
-    return <div>
-      <form>
-        <input type="text" value={this.state.userInput} onChange={event => this.setState({userInput: event.target.value})}/>
-        <button type="submit" onClick={this.addTask}>Add Task</button>
-      </form>
-      <div>
-        {this.state.tasks.map((task) => {
-          <Task 
-          id = {task.id}
-          task = {task}
-          removeTask = {this.removeTask}
-          markCompleted = {this.markCompleted}
-          assignCost = {this.assignCost}
-          />
-        })}
-      </div>
-      <div>{this.state.total}</div>
-      <form>
-        <input type="test" value={this.state.budget} onChange={event => this.setState({budget: event.target.value})}/>
-        <button type="submit" onClick={this.setBudget}>Input Budget</button>
-      </form>
-      <div>Difference: ${this.state.budget - this.calcTotal()}</div>
-    </div>
+    if (this.state.tasks.length > 0) {
+      console.log('this state tasks ', this.state.tasks)
+      return (
+        
+        <div>
+          <form>
+            <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
+            <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
+          </form>
+          <div>
+            {this.state.tasks.map((task, index) => {
+              return <Task 
+              key = {index}
+              id = {task.id}
+              task = {task.task}
+              removeTask = {this.removeTask.bind(this)}
+              markCompleted = {this.markCompleted.bind(this)}
+              assignCost = {this.assignCost.bind(this)}
+              />
+            })}
+          </div>
+          <div>{this.state.total}</div>
+          <form>
+            <input type="test" value={this.state.budget} onChange={(event) => this.setState({budget: event.target.value})}/>
+            <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
+          </form>
+          <div>Difference: ${this.state.budget - this.calcTotal()}</div>
+        </div>
+      )
+    } else {
+      return (
+        <div>Fetching your messages from our database...</div>
+      )
+    }
   }
 }
 

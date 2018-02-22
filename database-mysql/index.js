@@ -3,26 +3,11 @@ var bcrypt = require('bcrypt');
 
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
+  host     : 'moving.cgipzmxzylvi.us-east-1.rds.amazonaws.com',
+  user     : 'middleton',
+  password : 'h4ckr34t0r',
   database : 'moving'
 });
-
-var selectAll = function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
-
-//possible helper functions: 
-  //checking if user in the database
-  //check password provided for user
-  //add user to db
 
 connection.connect((err) => {
   if (err) { console.log('error connecting to db'); return; }
@@ -30,4 +15,3 @@ connection.connect((err) => {
 });
 
 module.exports.connection = connection;
-module.exports.selectAll = selectAll;

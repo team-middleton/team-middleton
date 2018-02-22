@@ -1,37 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import { BrowserRouter } from 'react-router-dom';
-import YelpList from './components/YelpList.jsx';
-import Header from './components/Header.jsx';
-import Main from './components/Main.jsx';
-// import homeHeader from './components/homeHeader.jsx';
-// import homeMain from './components/homeMain.jsx';
+import axios from 'axios';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
+import Moving from './components/Router.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      loggedIn: true
+      loggedIn: false
     }
+  }
+
+  login() {
+    this.setState({loggedIn: true}, () => {
+      console.log("Within login on app", this.state.loggedIn)
+    })
+
+  }
+
+  componentDidUpdate(){
+    console.log('this.state', this.state)
+  }
+
+  logout() {
+    axios.get('/logout')
+    .then((response) => {
+      this.setState({loggedIn: false})
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   }
 
   render () {
-    if(this.state.loggedIn){
-      return (<div>
-      <h1>Moving App</h1>
-      <Header />
-      <Main />
-    </div>)
+    if (this.state.loggedIn) {
+      return (
+        <div>
+          <h1>Moving App</h1>
+          <Moving logout={this.logout.bind(this)}/>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <h1>Welcome to Movin' on Up!</h1>
+          <Login login={this.login.bind(this)} />
+          <Signup />
+        </div>
+      )
     }
-    // else{
-    //   return (<div>
-    //   <h1>Movin on Up</h1>
-    //   <homeHeader />
-    //   <homeMain />
-    // </div>)
-    // }
   }
 }
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
