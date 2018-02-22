@@ -7,10 +7,8 @@ utilsMethods.dataCleaner= function (dataArray) {
     // this function takes in the data received from the yelp API 
     // and returns an array with an object at each index, formatted so that it's clean to send to client
     for(var i = 0; i < dataArray.length; i++) {
-        // console.log('categories ', dataArray[i].categories)
         var newBusiness = {};
         newBusiness.name = dataArray[i].id;
-        // newBusiness.category = dataArray[i].categories[0].alias;
         newBusiness.rating = dataArray[i].rating;
         newBusiness.phone = dataArray[i].phone;
         newBusiness.image_url = dataArray[i].image_url;
