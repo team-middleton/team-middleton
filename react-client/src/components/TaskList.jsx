@@ -30,9 +30,10 @@ class TaskList extends React.Component {
     })
   }
 
-  addTask(task) {
+  addTask(event) {
+    event.preventDefault()
     axios.post('/tasks', {
-      task: task,
+      task: this.state.userInput,
       cost: 0,
       complete: false
     })
@@ -70,7 +71,8 @@ class TaskList extends React.Component {
     })
   }
 
-  assignCost(taskId, cost) {
+  assignCost(event, taskId, cost) {
+    event.preventDefault()
     axios.post('/expenses', {
       taskId: taskId,
       cost: parseInt(cost)
@@ -83,9 +85,10 @@ class TaskList extends React.Component {
     })
   }
 
-  setBudget(budget) {
+  setBudget(event) {
+    event.preventDefault()
     axios.post('/budget', {
-      budget: budget
+      budget: this.state.budget
     })
     .then((response) => {
       this.getBudget()
@@ -118,7 +121,7 @@ class TaskList extends React.Component {
     return <div>
       <form>
         <input type="text" value={this.state.userInput} onChange={event => this.setState({userInput: event.target.value})}/>
-        <button type="submit" onClick={this.addTask}>Add Task</button>
+        <button type="submit" onClick={this.addTask(event)}>Add Task</button>
       </form>
       <div>
         {this.state.tasks.map((task) => {
@@ -134,7 +137,7 @@ class TaskList extends React.Component {
       <div>{this.state.total}</div>
       <form>
         <input type="test" value={this.state.budget} onChange={event => this.setState({budget: event.target.value})}/>
-        <button type="submit" onClick={this.setBudget}>Input Budget</button>
+        <button type="submit" onClick={this.setBudget(event)}>Input Budget</button>
       </form>
       <div>Difference: ${this.state.budget - this.calcTotal()}</div>
     </div>
