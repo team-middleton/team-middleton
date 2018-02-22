@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 
 function YelpListItem (props) {
     return (
-        <div>
-            <h4> <a href={props.business.url} target='_blank'> {props.business.name}</a> </h4>
+        <div style={{
+            border: "1px solid grey",
+            borderRadius: '10px',
+            padding: '10px'
+        }}>
+            <h5> <a href={props.business.url} target='_blank'> {props.business.name}</a> </h5>
             <h6> {props.business.address} </h6>
             <h6> {props.business.phone}</h6>
             <h6> Rating: <span></span> {props.business.rating}<span></span> stars </h6>
