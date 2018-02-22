@@ -4,15 +4,14 @@ import $ from 'jquery';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Main from './components/Main.jsx';
-import Logout from './components/Logout.jsx';
-// import homeHeader from './components/homeHeader.jsx';
-// import homeMain from './components/homeMain.jsx';
+import homeHeader from './components/homeHeader.jsx';
+import homeMain from './components/homeMain.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      loggedIn: false
+      loggedIn: true
     }
   }
 
@@ -22,7 +21,6 @@ class App extends React.Component {
       <h1>Moving App</h1>
       <Header />
       <Main />
-      <Logout />
     </div>)
     }
     else{

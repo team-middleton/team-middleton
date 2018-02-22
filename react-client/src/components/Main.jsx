@@ -10,7 +10,6 @@ const Main = () => (
     <Switch>
       <Route path='/tasks' component={TaskList}/>
       <Route path='/services' component={YelpList}/>
-      <Route path='/logout' component={Logout}/>
     </Switch>
   </main>
 )
