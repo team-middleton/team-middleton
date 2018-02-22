@@ -117,8 +117,8 @@ class TaskList extends React.Component {
   render() {
     return <div>
       <form>
-        <input type="text" value={this.state.userInput} onChange={event => this.setState({userInput: event.target.value})}/>
-        <button type="submit" onClick={this.addTask(event)}>Add Task</button>
+        <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
+        <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
       </form>
       <div>
         {this.state.tasks.map((task) => {
@@ -133,8 +133,8 @@ class TaskList extends React.Component {
       </div>
       <div>{this.state.total}</div>
       <form>
-        <input type="test" value={this.state.budget} onChange={event => this.setState({budget: event.target.value})}/>
-        <button type="submit" onClick={this.setBudget(event)}>Input Budget</button>
+        <input type="test" value={this.state.budget} onChange={(event) => this.setState({budget: event.target.value})}/>
+        <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
       </form>
       <div>Difference: ${this.state.budget - this.calcTotal()}</div>
     </div>
