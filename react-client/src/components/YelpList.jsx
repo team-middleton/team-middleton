@@ -57,8 +57,8 @@ class YelpList extends React.Component {
   }
 
   componentDidMount() {
-    this.getYelpServices()
-    // this.getZipCodeServices();
+    // this.getYelpServices()
+    this.getZipCodeServices();
   }
 
   handleChange(e) {
