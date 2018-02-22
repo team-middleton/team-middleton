@@ -11,16 +11,13 @@ class TaskList extends React.Component {
       userInput: '',
       budget: '',
     }
-    console.log('constructor function ran')
   }
 
   componentDidMount() {
-    console.log('component did mount')
-    // this.refreshList()
+    this.refreshList()
   }
 
   refreshList() {
-    // console.log('refreshList is running')
     axios.get('/tasks')
     .then((response) => {
       this.setState({tasks: response})

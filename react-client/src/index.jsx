@@ -30,7 +30,7 @@ class App extends React.Component {
   }
 
   render () {
-    if(this.state.loggedIn){
+    if (this.state.loggedIn) {
       return (
         <div>
           <h1>Moving App</h1>
@@ -38,12 +38,11 @@ class App extends React.Component {
           <Main />
         </div>
       )
-    }
-    else{
+    } else {
       return (
         <div>
           <h1>Welcome to Movin' on Up!</h1>
-          <Login login={this.login.bind(this)}/>
+          <Login login={this.login.bind(this)} />
           <Signup />
         </div>
       )
