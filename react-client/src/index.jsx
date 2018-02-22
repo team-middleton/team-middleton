@@ -15,14 +15,7 @@ class App extends React.Component {
   }
 
   login() {
-    this.setState({loggedIn: true}, () => {
-      console.log("Within login on app", this.state.loggedIn)
-    })
-
-  }
-
-  componentDidUpdate(){
-    console.log('this.state', this.state)
+    this.setState({loggedIn: true})
   }
 
   logout() {

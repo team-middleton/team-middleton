@@ -14,14 +14,14 @@ class TaskList extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component did mount')
     this.refreshList()
+    this.getBudget()
   }
 
   refreshList() {
+    console.log('Page refreshed')
     axios.get('/tasks')
     .then((response) => {
-      console.log('got tasks', response)
       this.setState({tasks: response.data})
     })
     .catch((err) => {
@@ -45,12 +45,14 @@ class TaskList extends React.Component {
   }
 
   removeTask(taskId) {
+    console.log("Delete function ran", taskId)
     axios.delete('/tasks', {
       params: {
         taskId: taskId
       }
     })
     .then((response) => {
+      console.log('Received a response from the server indicating successful deletion of data')
       this.refreshList()
     })
     .catch((err) => {
@@ -100,7 +102,8 @@ class TaskList extends React.Component {
   getBudget() {
     axios.get('/budget')
     .then((response) => {
-      this.setState({budget: response})
+      console.log(response)
+      this.setState({budget: response.data[0].totalbudget})
     })
     .catch((err) => {
       console.error(err)
@@ -118,9 +121,7 @@ class TaskList extends React.Component {
 
   render() {
     if (this.state.tasks.length > 0) {
-      console.log('this state tasks ', this.state.tasks)
       return (
-        
         <div>
           <form>
             <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
