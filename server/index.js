@@ -175,7 +175,9 @@ app.post('/expenses', checkSession, (req, res) => {
   )
 })
 
-app.get('/zipcode', checkSession, (req, res) => {
+app.get('/zipcode', 
+checkSession, 
+(req, res) => {
   db.connection.query(
     `SELECT zipcodefrom FROM users WHERE id = '${req.session.userId}'`,
     function(err, data) {
@@ -185,7 +187,9 @@ app.get('/zipcode', checkSession, (req, res) => {
   )
 })
 
-app.get('/yelpRequest', checkSession, (req, res) => {
+app.get('/yelpRequest', 
+checkSession, 
+(req, res) => {
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
   		Authorization : `Bearer ${APIKey.yelpAPI}`
