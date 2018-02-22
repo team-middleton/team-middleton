@@ -115,29 +115,37 @@ class TaskList extends React.Component {
   }
 
   render() {
-    return <div>
-      <form>
-        <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
-        <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
-      </form>
-      <div>
-        {this.state.tasks.map((task) => {
-          <Task 
-          id = {task.id}
-          task = {task}
-          removeTask = {this.removeTask}
-          markCompleted = {this.markCompleted}
-          assignCost = {this.assignCost}
-          />
-        })}
-      </div>
-      <div>{this.state.total}</div>
-      <form>
-        <input type="test" value={this.state.budget} onChange={(event) => this.setState({budget: event.target.value})}/>
-        <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
-      </form>
-      <div>Difference: ${this.state.budget - this.calcTotal()}</div>
-    </div>
+    if (this.state.tasks.length > 0) {
+      return (
+        <div>
+          <form>
+            <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
+            <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
+          </form>
+          <div>
+            {this.state.tasks.map((task) => {
+              <Task 
+              id = {task.id}
+              task = {task}
+              removeTask = {this.removeTask}
+              markCompleted = {this.markCompleted}
+              assignCost = {this.assignCost}
+              />
+            })}
+          </div>
+          <div>{this.state.total}</div>
+          <form>
+            <input type="test" value={this.state.budget} onChange={(event) => this.setState({budget: event.target.value})}/>
+            <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
+          </form>
+          <div>Difference: ${this.state.budget - this.calcTotal()}</div>
+        </div>
+      )
+    } else {
+      return (
+        <div>Fetching your messages from our database...</div>
+      )
+    }
   }
 }
 
