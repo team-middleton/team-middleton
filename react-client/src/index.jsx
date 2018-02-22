@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header.jsx';
 import Main from './components/Main.jsx';
-import Homeheader from './components/homeHeader.jsx';
-import Homemain from './components/homeMain.jsx';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,12 +15,12 @@ class App extends React.Component {
     }
   }
 
-  logIn() {
+  login() {
     this.setState({loggedIn: true})
   }
 
-  logOut() {
-    axios.post('/logout')
+  logout() {
+    axios.get('/logout')
     .then((response) => {
       this.setState({loggedIn: false})
     })
@@ -31,18 +31,22 @@ class App extends React.Component {
 
   render () {
     if(this.state.loggedIn){
-      return (<div>
-      <h1>Moving App</h1>
-      <Header logout={this.logOut}/>
-      <Main />
-    </div>)
+      return (
+        <div>
+          <h1>Moving App</h1>
+          <Header logout={this.logout.bind(this)}/>
+          <Main />
+        </div>
+      )
     }
     else{
-      return (<div>
-      <h1>Movin on Up</h1>
-      <Homeheader />
-      <Homemain />
-    </div>)
+      return (
+        <div>
+          <h1>Welcome to Movin' on Up!</h1>
+          <Login login={this.login.bind(this)}/>
+          <Signup />
+        </div>
+      )
     }
   }
 }

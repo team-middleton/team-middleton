@@ -24,7 +24,6 @@ var checkSession = function(req, res, next) {
     next()
   } else {
     console.error('Must be logged in')
-    res.redirect('/')
   }
 }
 
@@ -105,6 +104,16 @@ app.post('/login', (req, res) => {
   } else {
     res.status(403).send(/*negative*/)
   }
+})
+
+app.get('/logout', checkSession, (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err)
+    } else {
+      res.status(202).send()
+    }
+  })
 })
 
 app.get('/tasks', checkSession, (req, res) => {
