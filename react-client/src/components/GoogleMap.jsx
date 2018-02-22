@@ -5,7 +5,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker , defaultCenter} from "r
 const GoogleMaps = withScriptjs(withGoogleMap((props) => (
 
 <GoogleMap
-    defaultZoom={13}
+    defaultZoom={14}
     defaultCenter={{ lat: 40.755603, lng: -73.984931 }}
     center={{ lat: props.businesses[0].coordinates.latitude, lng: props.businesses[0].coordinates.longitude }}
   >

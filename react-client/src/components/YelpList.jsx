@@ -12,10 +12,11 @@ class YelpList extends React.Component {
     this.state = { 
         YelpList: [],
         serviceQuery: 'movers',
-        location: '02140'
+        location: '10538'
     }
     this.handleChange = this.handleChange.bind(this);
     this.getYelpServices = this.getYelpServices.bind(this);
+    this.getZipCodeServices = this.getZipCodeServices.bind(this);
   }
 
   getYelpServices () {
@@ -39,10 +40,24 @@ class YelpList extends React.Component {
       console.error(err)
     })
   }
+  
+  getZipCodeServices () {
+    // get zip code from the user
+    axios.get('/zipcode')
+    .then( (response) => {
+      this.setState({
+        //put the retrieve zip code from state
+        location: response
+        // TBD ARE WE GETTING JUST THE ZIP CODE FROM SERVER
+      }, () =>{
+        //once we have the zip code in state, get new yelp data for it
+        this.getYelpServices()
+      })
+    }) 
+  }
 
   componentDidMount() {
-    // set state to zip code from helper function from the database
-    this.getYelpServices();
+    this.getZipCodeServices();
   }
 
   handleChange(e) {
