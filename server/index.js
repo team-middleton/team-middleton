@@ -31,7 +31,7 @@ app.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     var user = req.body.username
     var pass = req.body.password
-    var zipcodefrom = req.body.zipcodefrom
+    var zipcodefrom = req.body.zipcode
     db.connection.query(
       `SELECT * FROM users WHERE username = '${user}'`,
       function(err, results) {
@@ -61,7 +61,7 @@ app.post('/signup', (req, res) => {
                       (null, ${id}, 'Unpack and enjoy your new home!', null, 0, null)`, 
                       function(err) {
                         if (err) console.error(err)
-                        res.status(201).send(/*affirmative*/)
+                        res.status(201).send()
                       } 
                     )
                   }
@@ -91,7 +91,7 @@ app.post('/login', (req, res) => {
           bcrypt.compare(pass, results[0].password, function(err, exists) {
             if (exists) {
               req.session.userId = results[0].id
-              res.status(201).send(/*affirmative*/)
+              res.send()
             } else {
               res.status(403).send(/*negative*/)
             }

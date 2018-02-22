@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
-import Header from './components/Header.jsx';
-import Main from './components/Main.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
+import Moving from './components/Router.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +15,14 @@ class App extends React.Component {
   }
 
   login() {
-    this.setState({loggedIn: true})
+    this.setState({loggedIn: true}, () => {
+      console.log("Within login on app", this.state.loggedIn)
+    })
+
+  }
+
+  componentDidUpdate(){
+    console.log('this.state', this.state)
   }
 
   logout() {
@@ -34,8 +40,7 @@ class App extends React.Component {
       return (
         <div>
           <h1>Moving App</h1>
-          <Header logout={this.logout.bind(this)}/>
-          <Main />
+          <Moving />
         </div>
       )
     } else {
@@ -50,4 +55,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
