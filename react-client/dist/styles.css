@@ -7,6 +7,7 @@ body {
 #app {
 	margin: 0 auto;
 	display: inline-block;
+	position: absolute;
 }
 ul {
 	list-style: none;
@@ -29,4 +30,5 @@ li a {
 button {
 	background-color: #B5BCBB;
 	color: #FFFFFF;
+	border-radius: 5px;
 }
