@@ -1,0 +1,32 @@
+body {
+	background-color: #F4C356;
+	font-family: 'Avenir Next Condensed';
+	color:  #22303D;
+	font-size: 1.5em;
+}
+#app {
+	margin: 0 auto;
+	display: inline-block;
+}
+ul {
+	list-style: none;
+	display: block;
+	float: left;
+}
+li {
+	float: left;
+}	
+li a {
+	font-family: 'Lucida Grande';
+	text-decoration: none;
+	display: block;
+	background-color: #B5BCBB;
+	padding: 15px;
+	margin: 5px;
+	border-radius: 5px;
+	color: white;
+}
+button {
+	background-color: #B5BCBB;
+	color: #FFFFFF;
+}
