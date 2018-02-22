@@ -12,11 +12,13 @@ class YelpList extends React.Component {
     this.state = { 
         YelpList: [],
         serviceQuery: 'movers',
-        location: '10538'
+        location: '10538',
+        map: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.getYelpServices = this.getYelpServices.bind(this);
     this.getZipCodeServices = this.getZipCodeServices.bind(this);
+
   }
 
   getYelpServices () {
@@ -31,25 +33,27 @@ class YelpList extends React.Component {
     .then((response) => {
       // console.log('client response : ', response)
       this.setState({
-        YelpList: response.data
+        YelpList: response.data,
+        map: true
       },() => {
-        // console.log(this.state.YelpList)
       }) 
     })
     .catch((err) => {
       console.error(err)
     })
   }
-  
+
+
   getZipCodeServices () {
     // get zip code from the user
     axios.get('/zipcode')
     .then( (response) => {
+      console.log('response ', response.data[0].zipcodefrom)
       this.setState({
         //put the retrieve zip code from state
-        location: response[0].zipcodefrom
-        // TBD ARE WE GETTING JUST THE ZIP CODE FROM SERVER
+        location: response.data[0].zipcodefrom
       }, () =>{
+        console.log('new state ', this.state.location)
         //once we have the zip code in state, get new yelp data for it
         this.getYelpServices()
       })
@@ -57,8 +61,7 @@ class YelpList extends React.Component {
   }
 
   componentDidMount() {
-    this.getYelpServices()
-    // this.getZipCodeServices();
+    this.getZipCodeServices();
   }
 
   handleChange(e) {
@@ -72,6 +75,22 @@ class YelpList extends React.Component {
 
 
   render () {
+    var mapComponent;
+    if (this.state.map) {
+      mapComponent = 
+              <GoogleMaps 
+          isMarkerShown
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `200px`}} />}
+          mapElement={<div style={{ height: `100%` }}/>}
+          businesses={this.state.YelpList}
+          />
+    } else {
+      mapComponent = null
+    }
+
+
     return (
     <div style={{
       float:'left'
@@ -90,19 +109,8 @@ class YelpList extends React.Component {
             < YelpListItem  key={business.name} business={business} />
         )}
         </div>
-
-
-
-        <GoogleMaps 
-          isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `200px`}} />}
-          mapElement={<div style={{ height: `100%` }}/>}
-          businesses={this.state.YelpList}
-          />
-
-
+        
+        {mapComponent}
 
     </div>
     )
