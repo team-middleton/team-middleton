@@ -15,12 +15,13 @@ utilsMethods.dataCleaner= function (dataArray) {
         newBusiness.url = dataArray[i].url;
         // TO FIX: save yelp's display_address array instead of the breakdown below
         // update this on front end 
-        newBusiness.address = {
-            city: dataArray[i].location.city,
-            state: dataArray[i].location.state,
-            address: dataArray[i].location.address1,
-            zip: dataArray[i].location.zip_code
-        },
+        // newBusiness.address = {
+        //     city: dataArray[i].location.city,
+        //     state: dataArray[i].location.state,
+        //     address: dataArray[i].location.address1,
+        //     zip: dataArray[i].location.zip_code
+        // },
+        newBusiness.address = dataArray[i].location.display_address
         newBusiness.coordinates = {
             latitude: dataArray[i].coordinates.latitude,
             longitude: dataArray[i].coordinates.longitude
