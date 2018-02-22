@@ -120,7 +120,8 @@ class TaskList extends React.Component {
   render() {
     if (this.state.tasks.length > 0) {
       return (
-        <div>
+    
+        <div className="tasks">
           <form>
             <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
             <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
@@ -147,7 +148,7 @@ class TaskList extends React.Component {
       )
     } else {
       return (
-        <div>Fetching your messages from our database...</div>
+        <div className="tasks">Fetching your messages from our database...</div>
       )
     }
   }

@@ -8,20 +8,19 @@ const Moving = (props) => (
     <div>
       <ul>
         <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
           <Link to="/tasks">Tasks</Link>
         </li>
         <li>
-          <Link to="/services">Services</Link>
+          <Link to="/service">Services</Link>
+        </li>
+        <li>
+          <button id="logout" onClick={props.logout}>Log Out</button>
         </li>
       </ul>
-      <hr />
       <Route exact path="/" />
       <Route path="/tasks" component={TaskList} />
-      <Route path="/services" component={YelpList} />
-      <button id="logout" onClick={props.logout}>Log Out</button>
+      <Route path="/service" component={YelpList} />
+
     </div>
   </Router>
 );
