@@ -46,10 +46,8 @@ class TaskList extends React.Component {
 
   removeTask(taskId) {
     console.log("Delete function ran", taskId)
-    axios.delete('/tasks', {
-      params: {
+    axios.post('/delete', {
         taskId: taskId
-      }
     })
     .then((response) => {
       console.log('Received a response from the server indicating successful deletion of data')
