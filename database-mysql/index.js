@@ -3,9 +3,9 @@ var bcrypt = require('bcrypt');
 
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
+  host     : 'moving.cgipzmxzylvi.us-east-1.rds.amazonaws.com',
+  user     : 'middleton',
+  password : 'h4ckr34t0r',
   database : 'moving'
 });
 
