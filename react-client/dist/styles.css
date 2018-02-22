@@ -1,13 +1,14 @@
 body {
+	display: grid;
+ 	grid-template-columns: 20% 20% 20% 20% 20%;
+	grid-template-rows: 50px 1fr 1fr 1fr 1fr 50px;
 	background-color: #F4C356;
 	font-family: 'Avenir Next Condensed';
 	color:  #22303D;
 	font-size: 1.5em;
 }
 #app {
-	margin: 0 auto;
-	display: inline-block;
-	position: absolute;
+	grid-area: 1 / 2 / 5 / 6;
 }
 ul {
 	list-style: none;
@@ -19,6 +20,7 @@ li {
 }	
 li a {
 	font-family: 'Lucida Grande';
+	font-size: 1em;
 	text-decoration: none;
 	display: block;
 	background-color: #B5BCBB;
@@ -28,7 +30,53 @@ li a {
 	color: white;
 }
 button {
+	font-family: 'Lucida Grande';
+	text-decoration: none;
+	display: block;
 	background-color: #B5BCBB;
-	color: #FFFFFF;
+	padding: 13px;
+	margin: 5px;
 	border-radius: 5px;
+	color: white;
+}
+
+#logout {
+	font-size: 1em;
+}
+
+.services {
+	grid-area: 1 / 2 / 5 / 6;
+	font-family: 'Lucida Grande'; 
+	float: left;
+	clear: both;
+}
+
+.yelpItems{
+	text-decoration: none;
+	font-size: .75em;
+	background-color: #FFE4A8;
+	padding: 6px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.yelpItems a {
+	text-decoration: none;
+	color: #22303D;
+}
+
+.task {
+	text-decoration: none;
+	font-size: .75em;
+	background-color: #FFE4A8;
+	padding: 6px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.tasks {
+	grid-area: 1 / 2 / 5 / 6;
+	font-family: 'Lucida Grande';
+	float: left;
+	clear: both;
 }

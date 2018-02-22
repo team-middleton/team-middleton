@@ -92,10 +92,8 @@ class YelpList extends React.Component {
 
 
     return (
-    <div style={{
-      float:'left'
-    }}> 
-      <div>
+    <div className="dropdowns">
+      <div className="services">
         <form type="submit" value="Submit" >
           <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
             <option value ="movers"> Movers </option>
@@ -109,9 +107,9 @@ class YelpList extends React.Component {
             < YelpListItem  key={business.name} business={business} />
         )}
         </div>
-        
+        <div className="map">
         {mapComponent}
-
+        </div>
     </div>
     )
   }
