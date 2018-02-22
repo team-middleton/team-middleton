@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Axios from 'axios';
 
 class Signup extends React.Component {
@@ -27,14 +28,16 @@ class Signup extends React.Component {
 	}
 
 	render(){
-		return(<div>
-			<form>
-			Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
-			Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
-			Zipcode: <input value={this.state.zipcode} onChange={(event) => this.setState({zipcode: event.target.value})}/>
-			<button type="submit" onClick={this.signup}>Sign Up!</button>
-			</form>
-		</div>)
+		return (
+			<div>
+				<form>
+				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
+				Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
+				Zipcode: <input value={this.state.zipcode} onChange={(event) => this.setState({zipcode: event.target.value})}/>
+				<button type="submit" onClick={this.signup}>Sign Up!</button>
+				</form>
+			</div>
+		)
 	}
 }
 
