@@ -8,9 +8,12 @@ utilsMethods.dataCleaner= function (dataArray) {
     // and returns an array with an object at each index, formatted so that it's clean to send to client
     for(var i = 0; i < dataArray.length; i++) {
         var newBusiness = {};
-        newBusiness.name = dataArray[i].id;
+        var formattedPhoneNumber = dataArray[i].phone.split('').slice(-10);
+        formattedPhoneNumber.splice(3,0,"-");
+        formattedPhoneNumber.splice(7,0,"-");
+        newBusiness.name = dataArray[i].name;
         newBusiness.rating = dataArray[i].rating;
-        newBusiness.phone = dataArray[i].phone;
+        newBusiness.phone = formattedPhoneNumber;
         newBusiness.image_url = dataArray[i].image_url;
         newBusiness.url = dataArray[i].url;
         // TO FIX: save yelp's display_address array instead of the breakdown below
