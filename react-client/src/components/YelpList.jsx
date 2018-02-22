@@ -47,7 +47,7 @@ class YelpList extends React.Component {
     .then( (response) => {
       this.setState({
         //put the retrieve zip code from state
-        location: response
+        location: response[0].zipcodefrom
         // TBD ARE WE GETTING JUST THE ZIP CODE FROM SERVER
       }, () =>{
         //once we have the zip code in state, get new yelp data for it
