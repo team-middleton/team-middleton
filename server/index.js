@@ -23,7 +23,7 @@ var checkSession = function(req, res, next) {
   if (req.session.userId) {
     next()
   } else {
-    console.error('Must be logged in')
+    console.log('session user id does not exist')
   }
 }
 
@@ -138,11 +138,14 @@ app.post('/tasks', checkSession, (req, res) => {
 })
 
 app.delete('/tasks', checkSession, (req, res) => {
-  `DELETE FROM tasks WHERE id = '${req.params.taskId}'`,
-  function(err) {
-    if (err) console.error(err)
-    res.status(202).send()
-  }
+  console.log('Delete request recieved by server', req.params)
+  db.connection.query(
+    `DELETE FROM todos WHERE id = '${req.params.taskId}'`,
+    function(err) {
+      if (err) console.error(err)
+      res.status(202).send()
+    }
+  )
 })
 
 app.post('/budget', checkSession, (req, res) => {
@@ -151,6 +154,16 @@ app.post('/budget', checkSession, (req, res) => {
     function(err) {
       if (err) console.error(err)
       res.status(201).send()
+    }
+  )
+})
+
+app.get('/budget', checkSession, (req, res) => {
+  db.connection.query(
+    `SELECT totalbudget FROM users WHERE id = '${req.session.userId}'`,
+    function(err, data) {
+      if (err) console.error(err)
+      res.status(200).send(data)
     }
   )
 })
