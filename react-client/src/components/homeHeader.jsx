@@ -14,4 +14,4 @@ const homeHeader = () => (
   </header>
 )
 
-export default homeHeader
+export default homeHeader;
