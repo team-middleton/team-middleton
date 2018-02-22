@@ -137,10 +137,10 @@ app.post('/tasks', checkSession, (req, res) => {
   )
 })
 
-app.delete('/tasks', checkSession, (req, res) => {
-  console.log('Delete request recieved by server', req.params)
+app.post('/delete', checkSession, (req, res) => {
+  console.log('Delete request recieved by server', req.body)
   db.connection.query(
-    `DELETE FROM todos WHERE id = '${req.params.taskId}'`,
+    `DELETE FROM todos WHERE id = '${req.body.taskId}'`,
     function(err) {
       if (err) console.error(err)
       res.status(202).send()
