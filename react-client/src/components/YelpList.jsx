@@ -73,30 +73,39 @@ class YelpList extends React.Component {
 
   render () {
     return (
-    <div>
-      <form type="submit" value="Submit" >
-        <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
-          <option value ="movers"> Movers </option>
-          <option value ="supplies"> Supplies </option>
-          <option value ="truck rental"> Truck rental </option>
-          <option value ="storage"> Storage </option>
-        </select>
-      </form>
-      
-      {this.state.YelpList.map((business, i) => 
-          < YelpListItem  key={business.name} business={business} />
-      )}
+    <div style={{
+      float:'left'
+    }}> 
+      <div>
+        <form type="submit" value="Submit" >
+          <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
+            <option value ="movers"> Movers </option>
+            <option value ="supplies"> Supplies </option>
+            <option value ="truck rental"> Truck rental </option>
+            <option value ="storage"> Storage </option>
+          </select>
+        </form>
+        
+        {this.state.YelpList.map((business, i) => 
+            < YelpListItem  key={business.name} business={business} />
+        )}
+        </div>
 
-      <GoogleMaps 
-        isMarkerShown
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `200px` }} />}
-        mapElement={<div style={{ height: `100%` }}/>}
-        businesses={this.state.YelpList}
-        />
 
-    </div>)
+
+        <GoogleMaps 
+          isMarkerShown
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `200px`}} />}
+          mapElement={<div style={{ height: `100%` }}/>}
+          businesses={this.state.YelpList}
+          />
+
+
+
+    </div>
+    )
   }
 }
 

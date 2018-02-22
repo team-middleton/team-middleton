@@ -13,14 +13,11 @@ const GoogleMaps = withScriptjs(withGoogleMap((props) => (
     {props.isMarkerShown && 
       props.businesses.map((business, i) => {
         return <Marker 
-        key={props.businesses[i].name}
-        position={{ lat: props.businesses[i].coordinates.latitude, lng: props.businesses[i].coordinates.longitude }} 
+          key={props.businesses[i].name}
+          position={{ lat: props.businesses[i].coordinates.latitude, lng: props.businesses[i].coordinates.longitude }} 
         />
       })
     }
-
-    
- 
 
   </GoogleMap>
 
