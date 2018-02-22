@@ -28,11 +28,11 @@ class YelpList extends React.Component {
     })
     //location needs to be helper function from the database
     .then((response) => {
-      console.log('client response : ', response)
+      // console.log('client response : ', response)
       this.setState({
         YelpList: response.data
       },() => {
-        
+        // console.log(this.state.YelpList)
       }) 
     })
     .catch((err) => {
@@ -77,8 +77,7 @@ class YelpList extends React.Component {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `200px` }} />}
         mapElement={<div style={{ height: `100%` }}/>}
-        latitude={37.80587}
-        longitude={-122.42058}
+        businesses={this.state.YelpList}
         />
 
     </div>)
