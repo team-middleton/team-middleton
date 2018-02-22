@@ -4,7 +4,7 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 
 // The Main component renders one of the Routes (provided that one matches). 
-const homeMain = () => (
+const Homemain = () => (
   <main>
     <Switch>
       <Route path='/login' component={Login}/>
@@ -13,4 +13,4 @@ const homeMain = () => (
   </main>
 )
 
-export default homeMain;
+export default Homemain;
