@@ -40,7 +40,7 @@ class App extends React.Component {
       return (
         <div>
           <h1>Moving App</h1>
-          <Moving />
+          <Moving logout={this.logout.bind(this)}/>
         </div>
       )
     } else {
