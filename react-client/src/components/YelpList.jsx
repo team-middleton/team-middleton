@@ -31,8 +31,10 @@ class YelpList extends React.Component {
     })
     //location needs to be helper function from the database
     .then((response) => {
+      console.log('yelp data ', response.data)
       // console.log('client response : ', response)
       this.setState({
+
         YelpList: response.data,
         map: true
       },() => {
@@ -48,12 +50,10 @@ class YelpList extends React.Component {
     // get zip code from the user
     axios.get('/zipcode')
     .then( (response) => {
-      console.log('response ', response.data[0].zipcodefrom)
       this.setState({
         //put the retrieve zip code from state
         location: response.data[0].zipcodefrom
       }, () =>{
-        console.log('new state ', this.state.location)
         //once we have the zip code in state, get new yelp data for it
         this.getYelpServices()
       })
