@@ -31,7 +31,7 @@ app.post('/signup', (req, res) => {
   if (req.body.username && req.body.password) {
     var user = req.body.username
     var pass = req.body.password
-    var zipcodefrom = req.body.zipcode
+    var zipcode = req.body.zipcode
     db.connection.query(
       `SELECT * FROM users WHERE username = '${user}'`,
       function(err, results) {
@@ -41,7 +41,7 @@ app.post('/signup', (req, res) => {
             if (err) console.error(err)
             db.connection.query(
               `INSERT INTO users (id, username, password, zipcodefrom, totalbudget) VALUES (?, ?, ?, ?, ?)`,
-              [null, user, hash, zipcodefrom, null], 
+              [null, user, hash, zipcode, null], 
               function(err) {
                 if (err) console.error(err)
                 db.connection.query(

@@ -12,7 +12,8 @@ class Login extends React.Component {
 		this.login = this.login.bind(this);
 	}
 
-	login() {
+	login(event) {
+		event.preventDefault()
 		axios.post('/login', {
 			username: this.state.username,
 			password: this.state.password
@@ -31,7 +32,7 @@ class Login extends React.Component {
 				<form>
 				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
 				Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
-				<button type="submit" onClick={this.login}>Login</button>
+				<button type="submit" onClick={(event) => {this.login(event)}}>Login</button>
 				</form>
 			</div>
 		)

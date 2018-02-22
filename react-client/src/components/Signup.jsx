@@ -8,12 +8,13 @@ class Signup extends React.Component {
 		this.state = {
 			username: '',
 			password: '',
-			zipcode: 0
+			zipcode: ''
 		}
 		this.signup = this.signup.bind(this);
 	}
 
-	signup() {
+	signup(event) {
+		event.preventDefault()
 		axios.post('/signup', {
 			username: this.state.username,
 			password: this.state.password,
@@ -34,7 +35,7 @@ class Signup extends React.Component {
 				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
 				Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
 				Zipcode: <input value={this.state.zipcode} onChange={(event) => this.setState({zipcode: event.target.value})}/>
-				<button type="submit" onClick={this.signup}>Sign Up!</button>
+				<button type="submit" onClick={(event) => {this.signup(event)}}>Sign Up!</button>
 				</form>
 			</div>
 		)
