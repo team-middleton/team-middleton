@@ -28,7 +28,7 @@ var checkSession = function(req, res, next) {
 }
 
 app.post('/signup', (req, res) => {
-  if (req.body.username && req.body.password) {
+  if (req.body.username && req.body.password && req.body.zipcode) {
     var user = req.body.username
     var pass = req.body.password
     var zipcode = req.body.zipcode
@@ -52,9 +52,9 @@ app.post('/signup', (req, res) => {
                     db.connection.query(
                       `INSERT INTO todos (id, user, task, price, complete, searchterm) VALUES 
                       (null, ${id}, 'End your lease', null, 0, null),
-                      (null, ${id}, 'Buy packing supplies', 50, 0, null),   
+                      (null, ${id}, 'Buy packing supplies', 0, 0, null),   
                       (null, ${id}, 'Pack your things', null, 0, null),
-                      (null, ${id}, 'Hire movers or rent a truck', 200, 0, null),
+                      (null, ${id}, 'Hire movers or rent a truck', 0, 0, null),
                       (null, ${id}, 'Pack the truck', null, 0, null),
                       (null, ${id}, 'Clean your old place', null, 0, null),
                       (null, ${id}, 'Drive the truck', null, 0, null),
