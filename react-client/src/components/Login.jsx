@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 class Login extends React.Component {
@@ -25,13 +26,15 @@ class Login extends React.Component {
 	}
 
 	render(){
-		return(<div>
-			<form>
-			Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
-			Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
-			<button type="submit" onClick={this.login}>Login</button>
-			</form>
-		</div>)
+		return (
+			<div>
+				<form>
+				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
+				Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
+				<button type="submit" onClick={this.login}>Login</button>
+				</form>
+			</div>
+		)
 	}
 }
 
