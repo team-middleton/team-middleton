@@ -166,6 +166,16 @@ app.post('/expenses', checkSession, (req, res) => {
   )
 })
 
+app.get('/zipcode', checkSession, (req, res) => {
+  db.connection.query(
+    `SELECT zipcodefrom FROM users WHERE id = '${req.session.userId}'`,
+    function(err, data) {
+      if (err) console.error(err)
+      res.status(200).send(data)
+    }
+  )
+})
+
 app.get('/yelpRequest', 
 // checkSession, 
 (req, res) => {
