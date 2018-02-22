@@ -211,7 +211,6 @@ app.get('/yelpRequest', checkSession, (req, res) => {
   	}
   })
   .then((response) => {
-    // console.log('this is res ', response);
     var cleanedData = utilsMethods.dataCleaner(response.data.businesses)
     res.status(200)
   	res.send(cleanedData)
