@@ -103,7 +103,7 @@ class YelpList extends React.Component {
       </form>
       <div className="services">
         {this.state.YelpList.map((business, i) => 
-            < YelpListItem  key={business.name} business={business} />
+            < YelpListItem  key={business.name} business={business} index={i} />
         )}
       </div>
       <div className="map">
