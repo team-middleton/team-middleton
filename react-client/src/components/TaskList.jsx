@@ -44,12 +44,18 @@ class TaskList extends React.Component {
     })
   }
 
-  removeTask(taskId) {
+  removeTask(taskId, index) {
+    console.log('index in remove task func', index);
     axios.post('/delete', {
         taskId: taskId
     })
     .then((response) => {
-      this.refreshList()
+      this.setState({
+        tasks: this.state.tasks.splice(index, 1)
+      }, ()=> {
+        this.refreshList()
+      })
+      
     })
     .catch((err) => {
       console.error(err)
@@ -126,8 +132,10 @@ class TaskList extends React.Component {
           </form>
           <div>
             {this.state.tasks.map((task, index) => {
+              console.log('index: in map', index)
               return <Task 
               key = {index}
+              index={index}
               id = {task.id}
               task = {task.task}
               cost = {task.price}

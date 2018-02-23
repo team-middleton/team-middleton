@@ -20,7 +20,7 @@ class Task extends React.Component {
             <input type="submit" value="Input Cost" onClick={(event) => {this.props.assignCost(event, this.props.id, this.state.userInput)}}/>
           </form>
           <div>${this.props.cost || '0'}</div>
-          <button onClick={() => {this.props.removeTask(this.props.id)}}>Remove</button>
+          <button onClick={() => {this.props.removeTask(this.props.id, this.props.index)}}>Remove</button>
         </div>
       )
     } else {
@@ -33,7 +33,7 @@ class Task extends React.Component {
             <input type="submit" value="Input Cost" onClick={(event) => {this.props.assignCost(event, this.props.id, this.state.userInput)}}/>
           </form>
           <div>${this.props.cost || '0'}</div>
-          <button onClick={() => {this.props.removeTask(this.props.id)}}>Remove</button>
+          <button onClick={() => {this.props.removeTask(this.props.id, this.props.index)}}>Remove</button>
         </div>
       )
     }
