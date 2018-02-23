@@ -121,15 +121,15 @@ button {
 }
 
 .truck {
-	width: 400px;
+	width: 300px;
 }
 
 .road {
-	width: 500px;
+	width: 400px;
 }
 
 .logo {
 	float: left;
-	width: 10%;
+	width: 11%;
 	grid-column: 1/6;
 }
