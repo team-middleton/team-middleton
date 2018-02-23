@@ -93,23 +93,22 @@ class YelpList extends React.Component {
 
     return (
     <div className="dropdowns">
+      <form type="submit" value="Submit" >
+        <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
+          <option value ="movers"> Movers </option>
+          <option value ="supplies"> Supplies </option>
+          <option value ="truck rental"> Truck rental </option>
+          <option value ="storage"> Storage </option>
+        </select>
+      </form>
       <div className="services">
-        <form type="submit" value="Submit" >
-          <select value={this.state.serviceQuery} onChange={this.handleChange.bind(this)} >
-            <option value ="movers"> Movers </option>
-            <option value ="supplies"> Supplies </option>
-            <option value ="truck rental"> Truck rental </option>
-            <option value ="storage"> Storage </option>
-          </select>
-        </form>
-        
         {this.state.YelpList.map((business, i) => 
             < YelpListItem  key={business.name} business={business} />
         )}
-        </div>
-        <div className="map">
-        {mapComponent}
-        </div>
+      </div>
+      <div className="map">
+      {mapComponent}
+      </div>
     </div>
     )
   }

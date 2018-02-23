@@ -49,6 +49,9 @@ button {
 	font-family: 'Lucida Grande'; 
 	float: left;
 	clear: both;
+	overflow: auto;
+	height: 240px;
+	width: 240px;
 }
 
 .yelpItems{
