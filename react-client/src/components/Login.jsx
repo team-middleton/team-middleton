@@ -23,6 +23,7 @@ class Login extends React.Component {
 		})
 		.catch((err) => {
 			console.error(err)
+			alert('username or password not valid!')
 			this.setState({
 				username: '',
 				password: ''
