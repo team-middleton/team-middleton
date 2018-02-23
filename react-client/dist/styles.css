@@ -46,7 +46,7 @@ button {
 
 .services {
 	grid-area: 1 / 2 / 5 / 6;
-	font-family: 'Lucida Grande'; 
+	font-family: 'Lucida Grande';
 	float: left;
 	clear: both;
 	overflow: auto;
