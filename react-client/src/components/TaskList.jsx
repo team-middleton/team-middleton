@@ -8,8 +8,9 @@ class TaskList extends React.Component {
     super(props)
     this.state = {
       tasks: [],
-      userInput: '',
-      budget: '',
+      taskInput: '',
+      budgetInput: '',
+      budget: ''
     }
   }
 
@@ -32,7 +33,7 @@ class TaskList extends React.Component {
   addTask(event) {
     event.preventDefault()
     axios.post('/tasks', {
-      task: this.state.userInput,
+      task: this.state.taskInput,
       cost: 0,
       complete: false
     })
@@ -91,7 +92,7 @@ class TaskList extends React.Component {
   setBudget(event) {
     event.preventDefault()
     axios.post('/budget', {
-      budget: this.state.budget
+      budget: this.state.budgetInput
     })
     .then((response) => {
       this.getBudget()
@@ -127,7 +128,7 @@ class TaskList extends React.Component {
     
         <div className="tasks">
           <form>
-            <input type="text" value={this.state.userInput} onChange={(event) => this.setState({userInput: event.target.value})}/>
+            <input type="text" value={this.state.taskInput} onChange={(event) => this.setState({taskInput: event.target.value})}/>
             <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
           </form>
           <div>
@@ -146,9 +147,8 @@ class TaskList extends React.Component {
               />
             })}
           </div>
-          <div>{this.state.total}</div>
           <form>
-            <input type="test" value={this.state.budget} onChange={(event) => this.setState({budget: event.target.value})}/>
+            <input type="test" value={this.state.budgetInput} onChange={(event) => this.setState({budgetInput: event.target.value})}/>
             <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
           </form>
           <div>Difference: ${this.state.budget - this.calcTotal()}</div>
@@ -156,7 +156,18 @@ class TaskList extends React.Component {
       )
     } else {
       return (
-        <div className="tasks">Fetching your messages from our database...</div>
+        <div className="tasks">
+          <form>
+            <input type="text" value={this.state.taskInput} onChange={(event) => this.setState({taskInput: event.target.value})}/>
+            <button type="submit" onClick={(event) => {this.addTask(event)}}>Add Task</button>
+          </form>
+          <div>You've got nothing left to do!</div>
+          <form>
+            <input type="test" value={this.state.budgetInput} onChange={(event) => this.setState({budgetInput: event.target.value})}/>
+            <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
+          </form>
+          <div>Difference: ${this.state.budget - this.calcTotal()}</div>
+        </div>
       )
     }
   }
