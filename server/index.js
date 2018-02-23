@@ -3,7 +3,7 @@ var session = require('express-session')
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
-var APIKey = process.env.API_KEY || require('./yelpAPI.js');
+var APIKey = process.env.API_KEY || require('./yelpAPI.js').yelpAPI;
 var utilsMethods = require('./utils.js');
 var axios = require('axios');
 
@@ -199,7 +199,7 @@ app.get('/zipcode', checkSession, (req, res) => {
 app.get('/yelpRequest', checkSession, (req, res) => {
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
-  		Authorization : `Bearer ${APIKey.yelpAPI}`
+  		Authorization : `Bearer ${APIKey}`
   	}, 
   	params: {
   		term: req.query.term,
@@ -219,5 +219,5 @@ app.get('/yelpRequest', checkSession, (req, res) => {
 })
 
 app.listen(process.env.PORT || 3000, function() {
-  console.log('listening on port 3000!');
+  console.log(`listening on port ${process.env.PORT || '3000'}!`);
 });
