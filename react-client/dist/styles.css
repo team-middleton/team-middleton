@@ -1,19 +1,44 @@
 body {
-	display: grid;
- 	grid-template-columns: 20% 20% 20% 20% 20%;
-	grid-template-rows: 50px 1fr 1fr 1fr 1fr 50px;
 	background-color: #F4C356;
 	font-family: 'Avenir Next Condensed';
 	color:  #22303D;
 	font-size: 1.5em;
+/*	margin: 0 auto;
+	display: inline-block;
+	position: absolute;*/
 }
 #app {
-	grid-area: 1 / 2 / 5 / 6;
+	/*grid-area: 1 / 2 / 5 / 6;*/
 }
+.root {
+	display: grid;
+	grid-template-rows: 20% 20% 20% 20% 20% ;
+	grid-template-columns: 50px 1fr 1fr 1fr 1fr 50px;
+}
+h1 {
+	grid-row: 1;
+	grid-column: 2/6;
+}
+.login {
+    grid-row: 2;
+    grid-column: 2/6;
+}
+.signup {
+    grid-row: 3;
+    grid-column: 2/6;
+}
+.navbar {
+	grid-row: 2;
+	grid-column: 2/6;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 100px 1fr;
+}
+
 ul {
 	list-style: none;
-	display: block;
-	float: left;
+	grid-row: 1;
+	grid-column: 1/3;
 }
 li {
 	float: left;
@@ -43,15 +68,22 @@ button {
 #logout {
 	font-size: 1em;
 }
-
+.dropdowns {
+	grid-column: 1/3;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
 .services {
-	grid-area: 1 / 2 / 5 / 6;
-	font-family: 'Lucida Grande';
+	grid-column: 1;
+	font-family: 'Lucida Grande'; 
 	float: left;
 	clear: both;
 	overflow: auto;
 	height: 240px;
 	width: 240px;
+}
+.map {
+	grid-column: 2;
 }
 
 .yelpItems{
