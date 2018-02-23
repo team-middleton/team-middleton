@@ -21,10 +21,21 @@ class Signup extends React.Component {
 			zipcode: this.state.zipcode
 		})
 		.then((response) => {
+			this.setState({
+				username: '',
+				password: '',
+				zipcode: ''
+			})
+			alert('account successfully created!')
 			console.log('You\'re signed up! Now just log in.')
 		})
 		.catch((error) => {
-			console.error(error)
+			alert('Username or password or zipcode not valid!')
+			this.setState({
+				username: '',
+				password: '',
+				zipcode: ''
+			})
 		})
 	}
 
