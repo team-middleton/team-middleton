@@ -18,27 +18,36 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  Moving' On Up
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  Movin' On Up is designed to simplify the process of moving. It helps users to organize their move with additional information and added efficiency. 
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  Movin' On Up allows the user to input tasks they'll need to complete prior to their move, with suggested and customizable tasks, in addition to a budget feature which allows them to track their spending on moving costs. It also takes in their zip code and suggests a range of services in the area based on typical moving needs. 
 
 ## Problem ##
   > Describe the problem your product solves.
+  Movin' On Up helps the user to get organized by gathering information related to a move in one place. 
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  Movin' On Up allows the user to save their move information, manage their budget related to this activity, and automatically displays the closest companies to them that can help them along the way.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  "Movin' On Up revolutionizes moving for those without a personal assistant."
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  To get started, register on the app and provide the zip code you will be moving from. 
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  "I suggested that my roommate make this app because I am moving across the country and hate organizing the details."
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  Download our app for your next move! 
