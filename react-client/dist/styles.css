@@ -127,3 +127,9 @@ button {
 .road {
 	width: 500px;
 }
+
+.logo {
+	float: left;
+	width: 10%;
+	grid-column: 1/6;
+}
