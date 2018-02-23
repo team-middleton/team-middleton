@@ -44,7 +44,7 @@ class Signup extends React.Component {
 			<div className="signup">
 				<form>
 				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
-				Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
+				Password: <input type='password' value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
 				Zipcode: <input value={this.state.zipcode} onChange={(event) => this.setState({zipcode: event.target.value})}/>
 				<button type="submit" onClick={(event) => {this.signup(event)}}>Sign Up!</button>
 				</form>
