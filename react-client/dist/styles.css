@@ -80,11 +80,7 @@ button {
 	float: left;
 	clear: both;
 	overflow: auto;
-<<<<<<< HEAD
-	height: 500px;
-=======
 	height: 50%;
->>>>>>> 1. Increase size of checkboxes in TaskList
 	width: 100%;
 }
 .map {
