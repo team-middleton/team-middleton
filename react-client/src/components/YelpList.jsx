@@ -13,14 +13,33 @@ class YelpList extends React.Component {
         YelpList: [],
         serviceQuery: 'movers',
         location: '10538',
-        map: false
+        map: false,
+        itemHovered: null
     }
     this.handleChange = this.handleChange.bind(this);
     this.getYelpServices = this.getYelpServices.bind(this);
     this.getZipCodeServices = this.getZipCodeServices.bind(this);
-
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+  }
+  
+  handleMouseLeave(i, e) {
+    console.log('mouseLeave runs ', i)
+    this.setState({
+      itemHovered: null
+    },() =>{
+      console.log('mouse leave new state: ', this.state.itemHovered)
+    })
   }
 
+  handleMouseEnter (i, e) {
+    console.log('mouseEnter runs ', i)
+    this.setState({
+      itemHovered: i
+    }, ()=>{
+      console.log('mouse Enter new state: ', this.state.itemHovered)
+    })
+  }
   getYelpServices () {
     //this gets data from yelp based on our seach terms for services
     axios.get('/yelpRequest', {
@@ -85,6 +104,7 @@ class YelpList extends React.Component {
           containerElement={<div style={{ height: `50%`}} />}
           mapElement={<div style={{ height: `100%` }}/>}
           businesses={this.state.YelpList}
+          hovered={this.state.itemHovered}
           />
     } else {
       mapComponent = null
@@ -102,8 +122,17 @@ class YelpList extends React.Component {
         </select>
       </form>
       <div className="services">
-        {this.state.YelpList.map((business, i) => 
-            < YelpListItem  key={business.name} business={business} index={i} />
+        {this.state.YelpList.map((business, i) => {
+          var letter =  String.fromCharCode(65 + i);
+            return < YelpListItem
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}  
+            key={business.name} 
+            business={business} 
+            letter={letter}
+             index={i}
+             />
+          }
         )}
       </div>
       <div className="map">

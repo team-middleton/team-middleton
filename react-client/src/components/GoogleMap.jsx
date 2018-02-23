@@ -12,8 +12,15 @@ const GoogleMaps = withScriptjs(withGoogleMap((props) => (
 
       {props.isMarkerShown && 
         props.businesses.map((business, i) => {
+          {/*if(props.hovered !== null) {
+            console.log('item hovered ', props.itemHovered)
+            var letter =  props.itemHovered.toString();
+          } else {
+            var letter =  String.fromCharCode(65 + i);
+          }*/}
+          
           return <Marker 
-            label= {(i+1).toString()}
+            label= {letter}
             key={props.businesses[i].name}
             position={{ lat: props.businesses[i].coordinates.latitude, lng: props.businesses[i].coordinates.longitude }} 
           />
