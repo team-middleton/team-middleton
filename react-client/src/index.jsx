@@ -44,8 +44,9 @@ class App extends React.Component {
     } else {
       return (
         <div className="root">
-          <h1>Welcome to Movin' on Up!</h1>
+          <h1>Movin' On Up</h1>
           <Parallax />
+          <h5>Hit the road:</h5>
           <Login login={this.login.bind(this)} />
           <Signup />
         </div>
