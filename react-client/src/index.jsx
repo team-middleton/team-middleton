@@ -7,7 +7,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Moving from './components/Router.jsx';
-import logo from '../dist/logo.png';
+import logo from '../dist/fullLogo.png';
 // import road from '../../dist/road.png'
 
 
@@ -37,8 +37,7 @@ class App extends React.Component {
     if (this.state.loggedIn) {
       return (
         <div>
-          <img src={logo} className="logo"/>
-          <h1>Movin' on Up </h1>
+          <div className="nav"><img src={logo} className="logo"/></div>
           <Moving logout={this.logout.bind(this)}/>
         </div>
       )
