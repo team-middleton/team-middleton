@@ -80,7 +80,11 @@ button {
 	float: left;
 	clear: both;
 	overflow: auto;
+<<<<<<< HEAD
 	height: 500px;
+=======
+	height: 50%;
+>>>>>>> 1. Increase size of checkboxes in TaskList
 	width: 100%;
 }
 .map {
@@ -119,6 +123,10 @@ button {
 	font-family: 'Lucida Grande';
 	float: left;
 	clear: both;
+}
+
+.checkbox {
+	transform: scale(2);
 }
 
 .parallax {
