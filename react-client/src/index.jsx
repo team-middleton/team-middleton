@@ -2,11 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
+import Parallax from "./components/Parallax.jsx";
+import { ParallaxProvider } from 'react-scroll-parallax';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Moving from './components/Router.jsx';
-import van from './van.png';
-import Parallax from "./components/Parallax.jsx";
+// import van from '../../dist/van.png';
+// import road from '../../dist/road.png'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -33,17 +36,16 @@ class App extends React.Component {
   render () {
     if (this.state.loggedIn) {
       return (
-        <div className="root">
+        <div>
           <h1>Moving App</h1>
           <Moving logout={this.logout.bind(this)}/>
-          <Parallax />
         </div>
       )
     } else {
       return (
-        <div className="root">
+        <div>
           <h1>Welcome to Movin' on Up!</h1>
-          <img className = "truck" src={van}/>
+          <Parallax />
           <Login login={this.login.bind(this)} />
           <Signup />
         </div>
