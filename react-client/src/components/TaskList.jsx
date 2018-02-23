@@ -133,7 +133,6 @@ class TaskList extends React.Component {
           </form>
           <div>
             {this.state.tasks.map((task, index) => {
-              console.log('index: in map', index)
               return <Task 
               key = {index}
               index={index}
