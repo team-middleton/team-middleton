@@ -1,5 +1,3 @@
-var dummyData = require('./dummyData.js');
-
 var utilsMethods = {};
 
 utilsMethods.dataCleaner= function (dataArray) {
