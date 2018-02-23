@@ -138,7 +138,6 @@ app.post('/tasks', checkSession, (req, res) => {
 })
 
 app.post('/delete', checkSession, (req, res) => {
-  console.log('Delete request recieved by server', req.body)
   db.connection.query(
     `DELETE FROM todos WHERE id = '${req.body.taskId}'`,
     function(err) {
@@ -170,7 +169,7 @@ app.get('/budget', checkSession, (req, res) => {
 
 app.post('/checklist', checkSession, (req, res) => {
   db.connection.query(
-    `UPDATE todos SET complete = 'true' WHERE id = '${req.body.taskId}'`,
+    `UPDATE todos SET complete = !complete WHERE id = '${req.body.taskId}'`,
     function(err) {
       if (err) console.error(err)
       res.status(201).send()

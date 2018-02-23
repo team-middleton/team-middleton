@@ -45,12 +45,10 @@ class TaskList extends React.Component {
   }
 
   removeTask(taskId) {
-    console.log("Delete function ran", taskId)
     axios.post('/delete', {
         taskId: taskId
     })
     .then((response) => {
-      console.log('Received a response from the server indicating successful deletion of data')
       this.refreshList()
     })
     .catch((err) => {
@@ -132,6 +130,8 @@ class TaskList extends React.Component {
               key = {index}
               id = {task.id}
               task = {task.task}
+              cost = {task.price}
+              checked = {task.complete}
               removeTask = {this.removeTask.bind(this)}
               markCompleted = {this.markCompleted.bind(this)}
               assignCost = {this.assignCost.bind(this)}
