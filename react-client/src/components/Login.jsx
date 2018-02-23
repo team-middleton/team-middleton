@@ -20,10 +20,6 @@ class Login extends React.Component {
 		})
 		.then((response) => {
 			this.props.login()
-			this.setState({
-				username: '',
-				password: ''
-			})
 		})
 		.catch((err) => {
 			console.error(err)
