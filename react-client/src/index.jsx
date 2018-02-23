@@ -38,7 +38,7 @@ class App extends React.Component {
       return (
         <div>
           <img src={logo} className="logo"/>
-          <h1>Movin' on Up</h1>
+          <h1>Movin' on Up </h1>
           <Moving logout={this.logout.bind(this)}/>
         </div>
       )
