@@ -14,7 +14,7 @@ class Task extends React.Component {
       return (
         <div className="task">
           <input type="checkBox" onClick={() => {this.props.markCompleted(this.props.id)}} checked/>
-          <div>{this.props.task}</div>
+          <div className="complete" >{this.props.task}</div>
           <form>
             <input type="text" value={this.state.userInput} onChange={(event) => {this.setState({userInput: event.target.value})}}/>
             <input type="submit" value="Input Cost" onClick={(event) => {this.props.assignCost(event, this.props.id, this.state.userInput)}}/>
@@ -27,7 +27,7 @@ class Task extends React.Component {
       return (
         <div className="task">
           <input type="checkBox" onClick={() => {this.props.markCompleted(this.props.id)}}/>
-          <div>{this.props.task}</div>
+          <div className="incomplete">{this.props.task}</div>
           <form>
             <input type="text" value={this.state.userInput} onChange={(event) => {this.setState({userInput: event.target.value})}}/>
             <input type="submit" value="Input Cost" onClick={(event) => {this.props.assignCost(event, this.props.id, this.state.userInput)}}/>
