@@ -3,10 +3,9 @@ var session = require('express-session')
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var db = require('../database-mysql');
-var APIKey = require('./yelpAPI.js');
+var APIKey = process.env.API_KEY || require('./yelpAPI.js');
 var utilsMethods = require('./utils.js');
 var axios = require('axios');
-
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -15,7 +14,7 @@ app.use(bodyParser.json())
 app.use(session({
   resave: false, 
   saveUninitialized: false, 
-  secret: 'superSuperSecretString', 
+  secret: 'someSuperSecretString', 
   cookie: {maxAge : 600000}
 }));
 
@@ -219,6 +218,6 @@ app.get('/yelpRequest', checkSession, (req, res) => {
   })
 })
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('listening on port 3000!');
 });
