@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt');
 
 
 var connection = mysql.createConnection({
-  host     : Process.env.DB_URL || 'moving.cgipzmxzylvi.us-east-1.rds.amazonaws.com',
+  host     : process.env.DB_URL || 'moving.cgipzmxzylvi.us-east-1.rds.amazonaws.com',
   user     : 'middleton',
   password : 'h4ckr34t0r',
   database : 'moving'
