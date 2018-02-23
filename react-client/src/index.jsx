@@ -36,7 +36,7 @@ class App extends React.Component {
   render () {
     if (this.state.loggedIn) {
       return (
-        <div className="root">
+        <div className="user">
           <div className="nav"><img src={logo} className="logo"/></div>
           <Moving logout={this.logout.bind(this)}/>
         </div>

@@ -6,24 +6,23 @@ import React from 'react'
 const ParallaxImage = () => (
     <div className="parallax">
     <Parallax
-        className="truck"
         offsetYMax={30}
         offsetYMin={-30}
-        offsetXMax={-30}
-        offsetXMin={30}
+        offsetXMax={-5}
+        offsetXMin={5}
         slowerScrollRate
         tag="figure"
     >
-    <img src={van} />
+    <img className="truck" src={van} />
     </Parallax>
+    <br/>
     <Parallax
-        className="road"
-        offsetYMax={6}
-        offsetYMin={-6}
+        offsetYMax={5}
+        offsetYMin={-5}
         slowerScrollRate
         tag="figure"
     >
-    <img src={road} />
+    <img className="road" src={road} />
     </Parallax>
     </div>
 );
