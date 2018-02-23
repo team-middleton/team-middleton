@@ -50,8 +50,6 @@ class YelpList extends React.Component {
     })
     //location needs to be helper function from the database
     .then((response) => {
-      console.log('yelp data ', response.data)
-      // console.log('client response : ', response)
       this.setState({
 
         YelpList: response.data,

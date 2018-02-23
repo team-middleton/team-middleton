@@ -105,7 +105,7 @@ class TaskList extends React.Component {
   getBudget() {
     axios.get('/budget')
     .then((response) => {
-      console.log(response)
+      // console.log(response)
       this.setState({budget: response.data[0].totalbudget})
     })
     .catch((err) => {
