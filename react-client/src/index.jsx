@@ -36,14 +36,14 @@ class App extends React.Component {
   render () {
     if (this.state.loggedIn) {
       return (
-        <div>
+        <div className="user">
           <div className="nav"><img src={logo} className="logo"/></div>
           <Moving logout={this.logout.bind(this)}/>
         </div>
       )
     } else {
       return (
-        <div>
+        <div className="root">
           <h1>Welcome to Movin' on Up!</h1>
           <Parallax />
           <Login login={this.login.bind(this)} />
