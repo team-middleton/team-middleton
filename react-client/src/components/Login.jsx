@@ -32,7 +32,7 @@ class Login extends React.Component {
 
 	render(){
 		return (
-			<div>
+			<div className="login">
 				<form>
 				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
 				Password: <input value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>

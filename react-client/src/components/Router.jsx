@@ -5,7 +5,7 @@ import YelpList from './YelpList.jsx';
 
 const Moving = (props) => (
   <Router>
-    <div>
+    <div className="navbar">
       <ul>
         <li>
           <Link to="/tasks">Tasks</Link>
