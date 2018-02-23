@@ -115,3 +115,15 @@ button {
 	float: left;
 	clear: both;
 }
+
+.parallax {
+	display: block;
+}
+
+.truck {
+	width: 400px;
+}
+
+.road {
+	width: 500px;
+}
