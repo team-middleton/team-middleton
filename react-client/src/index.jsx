@@ -5,6 +5,8 @@ import axios from 'axios';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Moving from './components/Router.jsx';
+import van from './van.png';
+import Parallax from "./components/Parallax.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,12 +36,14 @@ class App extends React.Component {
         <div className="root">
           <h1>Moving App</h1>
           <Moving logout={this.logout.bind(this)}/>
+          <Parallax />
         </div>
       )
     } else {
       return (
         <div className="root">
           <h1>Welcome to Movin' on Up!</h1>
+          <img className = "truck" src={van}/>
           <Login login={this.login.bind(this)} />
           <Signup />
         </div>
@@ -48,4 +52,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<ParallaxProvider><App /></ParallaxProvider>, document.getElementById('app'));
