@@ -35,9 +35,9 @@ class Login extends React.Component {
 		return (
 			<div className="login">
 				<form>
-				Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
-				Password: <input type='password' value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
-				<button type="submit" onClick={(event) => {this.login(event)}}>Login</button>
+					Username: <input value={this.state.username} onChange={(event) => this.setState({username: event.target.value})}/>
+					Password: <input type='password' value={this.state.password} onChange={(event) => this.setState({password: event.target.value})}/>
+					<button type="submit" onClick={(event) => {this.login(event)}}>Login</button>
 				</form>
 			</div>
 		)
