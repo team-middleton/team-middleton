@@ -8,7 +8,7 @@ const Moving = (props) => (
     <div className="navbar">
       <ul>
         <li>
-          <Link to="/tasks">Tasks</Link>
+          <Link to="/">Tasks</Link>
         </li>
         <li>
           <Link to="/service">Services</Link>
@@ -17,8 +17,8 @@ const Moving = (props) => (
           <button id="logout" onClick={props.logout}>Log Out</button>
         </li>
       </ul>
-      <Route exact path="/" />
-      <Route path="/tasks" component={TaskList} />
+      <Route exact path="/" component={TaskList}/>
+
       <Route path="/service" component={YelpList} />
 
     </div>
