@@ -97,7 +97,7 @@ class YelpList extends React.Component {
       mapComponent = 
               <GoogleMaps 
           isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_83xpevHdDbkGIRm_wbY-6MtIT_b2cg&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `50%`}} />}
           mapElement={<div style={{ height: `100%` }}/>}
