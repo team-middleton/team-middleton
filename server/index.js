@@ -28,28 +28,36 @@ var checkSession = function(req, res, next) {
   }
 }
 
+// signup endpoint: takes user input, queries db to check if user exists, inserts into db with default tasks for that user
 app.post('/signup', (req, res) => {
+  // check if all 3 user fields provided
   if (req.body.username && req.body.password && req.body.zipcode) {
     var user = req.body.username
     var pass = req.body.password
     var zipcode = req.body.zipcode
+    // query db for provided username
     db.connection.query(
       `SELECT * FROM users WHERE username = '${user}'`,
       function(err, results) {
         if (err) console.error(err);
+        // if user is not in the db, length of results will be zero
         if (results.length === 0) { 
+          // hash the provided password
           bcrypt.hash(pass, null, null, (err, hash) => {
             if (err) console.error(err)
+            // insert user, password, zipcode into 'users' table
             db.connection.query(
               `INSERT INTO users (id, username, password, zipcodefrom, totalbudget) VALUES (?, ?, ?, ?, ?)`,
               [null, user, hash, zipcode, null], 
               function(err) {
                 if (err) console.error(err)
+                // get the assigned numerical id for that user
                 db.connection.query(
                   `SELECT id FROM users WHERE username = '${user}'`,
                   function(err, results) {
                     if (err) { console.error(err) }
-                    var id = results[0].id            
+                    var id = results[0].id
+                    // bulk insert a set of default tasks into 'todos' table, unique to that user       
                     db.connection.query(
                       `INSERT INTO todos (id, user, task, price, complete, searchterm) VALUES 
                       (null, ${id}, 'End your lease', null, 0, null),

@@ -13,6 +13,10 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
+-- 'todos' table has 'one-to-many' relationship to a user: 
+-- one user has many todos, each todo is unique to one user.
+-- on signup, 'default' todo rows are created for the new user
+
 CREATE TABLE todos (
   id int NOT NULL AUTO_INCREMENT,
   user integer NOT NULL REFERENCES users(id),
