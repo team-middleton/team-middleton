@@ -8,7 +8,6 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Moving from './components/Router.jsx';
 import logo from '../dist/fullLogo.png';
-// import road from '../../dist/road.png'
 
 
 class App extends React.Component {
@@ -32,7 +31,7 @@ class App extends React.Component {
       console.error(err)
     })
   }
-
+//moving is browser router component, but cannot be called router. Logged in users get the router, unauthenticated users get conditional rendering. 
   render () {
     if (this.state.loggedIn) {
       return (
