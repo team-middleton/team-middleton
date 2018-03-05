@@ -112,14 +112,17 @@ class YelpList extends React.Component {
       // when we have services to show
       // this is done by creating a variable mapComponent that will either be null
       // or the actual map component
+
+      // i don't exactly know what the loading element is but i don't think it works without it
+      // the height of the container element is what is used to align it with the height of the service
+          // list right next to the map
       mapComponent = 
               <GoogleMaps 
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_83xpevHdDbkGIRm_wbY-6MtIT_b2cg&v=3.exp&libraries=geometry,drawing,places"
-          // i don't exactly know what the loading element is but i don't think it works without it
+          
           loadingElement={<div style={{ height: `100%` }} />}
-          // the height of the container element is what is used to align it with the height of the service
-          // list right next to the map
+          
           containerElement={<div style={{ height: `100%`}} />}
           mapElement={<div style={{ height: `100%` }}/>}
           businesses={this.state.YelpList}
@@ -150,8 +153,6 @@ class YelpList extends React.Component {
       </form>
       <div className="services">
         {this.state.YelpList.map((business, i) => {
-          // here we map through each of the services retrieve from yelp
-          // and make a new component with each one
           var letter =  String.fromCharCode(65 + i);
             return < YelpListItem
             onMouseEnter={this.handleMouseEnter}
