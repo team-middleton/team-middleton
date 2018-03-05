@@ -207,6 +207,8 @@ app.get('/zipcode', checkSession, (req, res) => {
 })
 
 app.get('/yelpRequest', checkSession, (req, res) => {
+  // this gets back business from yelp based on the item searched from the dropdown in services
+  // as well as the user's zip code
 	axios.get('https://api.yelp.com/v3/businesses/search', {
   	headers: {
   		Authorization : `Bearer ${APIKey}`
@@ -219,6 +221,8 @@ app.get('/yelpRequest', checkSession, (req, res) => {
   	}
   })
   .then((response) => {
+    // data from yelp is then passed into our data cleaner function in utils
+    // and saved to the cleanedData variable, which is then sent to the client
     var cleanedData = utilsMethods.dataCleaner(response.data.businesses)
     res.status(200)
   	res.send(cleanedData)
