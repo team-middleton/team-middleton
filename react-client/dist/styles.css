@@ -89,11 +89,12 @@ button {
 	float: left;
 	clear: both;
 	overflow: auto;
-	height: 50%;
+	height: 400px;
 	width: 100%;
 }
 .map {
 	grid-column: 2;
+	height: 100%;
 }
 
 .yelpItems{
