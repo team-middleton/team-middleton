@@ -13,10 +13,8 @@ const Moving = (props) => (
         <li>
           <Link to="/service">Services</Link>
         </li>
-        <li>
-          <button id="logout" onClick={props.logout}>Log Out</button>
-        </li>
       </ul>
+      <button id="logout" onClick={props.logout}>Log Out</button>
       <Route exact path="/" component={TaskList}/>
 
       <Route path="/service" component={YelpList} />
@@ -26,3 +24,5 @@ const Moving = (props) => (
 );
 
 export default Moving;
+
+//Browser router! Note that the exact path is needed to keep the router on the right track - otherwise it gets confused, since there's no dedicated homepage.

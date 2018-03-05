@@ -28,3 +28,5 @@ const ParallaxImage = () => (
 );
 
 export default ParallaxImage;
+
+//The parallax component is set up for scrolling, so all offsets will confirm to that. 
