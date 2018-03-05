@@ -19,8 +19,8 @@ class TaskList extends React.Component {
     this.getBudget()
   }
 
+  // gets list of user's tasks from the database and updates the list component
   refreshList() {
-    console.log('Page refreshed')
     axios.get('/tasks')
     .then((response) => {
       this.setState({tasks: response.data})
@@ -30,6 +30,7 @@ class TaskList extends React.Component {
     })
   }
 
+  // posts a user-generated task to the database and updates the list component
   addTask(event) {
     event.preventDefault()
     axios.post('/tasks', {
@@ -45,24 +46,21 @@ class TaskList extends React.Component {
     })
   }
 
+  // deletes a task from the database and updates the list component
   removeTask(taskId, index) {
     console.log('index in remove task func', index);
     axios.post('/delete', {
         taskId: taskId
     })
     .then((response) => {
-      this.setState({
-        tasks: this.state.tasks.splice(index, 1)
-      }, ()=> {
-        this.refreshList()
-      })
-      
+      this.refreshList()
     })
     .catch((err) => {
       console.error(err)
     })
   }
 
+  // updates the task in the database and updates the list component
   markCompleted(taskId) {
     axios.post('/checklist', {
       taskId: taskId
@@ -75,6 +73,7 @@ class TaskList extends React.Component {
     })
   }
 
+  // updates the task in the database and updates the list component
   assignCost(event, taskId, cost) {
     event.preventDefault()
     axios.post('/expenses', {
@@ -89,6 +88,7 @@ class TaskList extends React.Component {
     })
   }
 
+  // updates the component's state to reflect budget input by user
   setBudget(event) {
     event.preventDefault()
     axios.post('/budget', {
@@ -102,10 +102,10 @@ class TaskList extends React.Component {
     })
   }
 
+  // gets user's budget from the database and updates the list component
   getBudget() {
     axios.get('/budget')
     .then((response) => {
-      // console.log(response)
       this.setState({budget: response.data[0].totalbudget})
     })
     .catch((err) => {
@@ -113,6 +113,7 @@ class TaskList extends React.Component {
     })
   }
 
+  // calculates the total cost of all the items in the task list
   calcTotal() {
     return this.state.tasks.reduce((acc, task) => {
       if (task.price) {
@@ -123,9 +124,9 @@ class TaskList extends React.Component {
   }
 
   render() {
+    // only renders the actual task list if the user has saved tasks, but renders all the input fields regardless
     if (this.state.tasks.length > 0) {
       return (
-    
         <div className="tasks">
           <form>
             <input type="text" value={this.state.taskInput} onChange={(event) => this.setState({taskInput: event.target.value})}/>
@@ -150,6 +151,7 @@ class TaskList extends React.Component {
             <input type="test" value={this.state.budgetInput} onChange={(event) => this.setState({budgetInput: event.target.value})}/>
             <button type="submit" onClick={(event) => this.setBudget(event)}>Input Budget</button>
           </form>
+          <div>Budget: ${this.state.budget}</div>
           <div>Difference: ${this.state.budget - this.calcTotal()}</div>
         </div>
       )

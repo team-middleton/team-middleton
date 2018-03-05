@@ -10,7 +10,8 @@ class Task extends React.Component {
   }
 
   render() {
-    if (this.props.checked) {
+    // renders task component with different CSS classes depending on whether or not the user has marked it as complete
+    if (this.props.checked) { 
       return (
         <div className="task">
           <input className="checkbox" type="checkBox" onClick={() => {this.props.markCompleted(this.props.id)}} checked/>
